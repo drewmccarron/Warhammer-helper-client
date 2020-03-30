@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 // import { Link } from 'react-router-dom'
 // import axios from 'axios'
 // import apiUrl from '../../apiConfig'
-import { indexCombats, createCombat, showCombat } from '../../api/combats'
+import { indexCombats, createCombat, showCombat, deleteCombat, patchCombat } from '../../api/combats'
 
 class Combats extends Component {
   constructor () {
@@ -39,6 +39,21 @@ class Combats extends Component {
       .catch(console.error)
   }
 
+  delete = id => {
+    event.preventDefault()
+    console.log(event.target.id)
+    deleteCombat(event.target.id)
+      .then(res => console.log(res))
+      .catch(console.error)
+  }
+
+  patch = (event) => {
+    event.preventDefault()
+    patchCombat(this.state.combat, event.target.id)
+      .then(res => console.log(res))
+      .catch(console.error)
+  }
+
   handleSubmit = (event) => {
     event.preventDefault()
     createCombat(this.state.combat, this.props.user)
@@ -68,8 +83,11 @@ class Combats extends Component {
       combatJSX = 'No combats yet. Make some!'
     } else {
       const combatsList = combats.map(combat => (
-        <li key={combat._id} id={combat._id} onClick={this.show}>
+        <li key={combat._id}>
           {combat.title}
+          <button type='submit' id={combat._id} onClick={this.show}>Get</button>
+          <button type='submit' id={combat._id} onClick={this.delete}>Delete</button>
+          <button type='submit' id={combat._id} onClick={this.patch}>Patch</button>
         </li>
       ))
 
