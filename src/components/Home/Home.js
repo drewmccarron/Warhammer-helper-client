@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 // import axios from 'axios'
 // import apiUrl from '../../apiConfig'
-import { indexCombats, createCombat } from '../../api/combats'
+import { indexCombats, createCombat, showCombat } from '../../api/combats'
 
 class Combats extends Component {
   constructor () {
@@ -31,6 +31,12 @@ class Combats extends Component {
     const editedCombat = Object.assign(this.state.combat, createdField)
     // 3. Set the state
     this.setState({ combat: editedCombat })
+  }
+  show = id => {
+    console.log(event.target.id)
+    showCombat(event.target.id)
+      .then(res => console.log(res))
+      .catch(console.error)
   }
 
   handleSubmit = (event) => {
@@ -62,10 +68,8 @@ class Combats extends Component {
       combatJSX = 'No combats yet. Make some!'
     } else {
       const combatsList = combats.map(combat => (
-        <li key={combat._id}>
-          <Link to={`/combats/${combat._id}`}>
-            {combat.title}
-          </Link>
+        <li key={combat._id} id={combat._id} onClick={this.show}>
+          {combat.title}
         </li>
       ))
 

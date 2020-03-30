@@ -8,6 +8,13 @@ export const indexCombats = user => {
   })
 }
 
+export const showCombat = data => {
+  return axios({
+    method: 'GET',
+    url: apiUrl + '/combats/' + data
+  })
+}
+
 export const createCombat = (data, user) => {
   return axios({
     method: 'POST',
