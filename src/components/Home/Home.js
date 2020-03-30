@@ -2,26 +2,50 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 // import axios from 'axios'
 // import apiUrl from '../../apiConfig'
-import { indexCombats } from '../../api/combats'
+import { indexCombats, createCombat } from '../../api/combats'
 
 class Combats extends Component {
   constructor () {
     super()
     this.state = {
-      combats: null
+      combat: {
+        title: '',
+        numAttacks: undefined,
+        hit: undefined,
+        wound: undefined,
+        rend: undefined,
+        damage: undefined,
+        armorSave: undefined,
+        fnp: undefined
+      },
+      created: false
     }
+  }
+
+  handleChange = (event) => {
+    // 1. Create a new object with key of 'name' property on input, value with 'value' property
+    const createdField = {
+      [event.target.name]: event.target.value
+    }
+    // 2. Combine the current `movie` with updatedField
+    const editedCombat = Object.assign(this.state.combat, createdField)
+    // 3. Set the state
+    this.setState({ combat: editedCombat })
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault()
+    createCombat(this.state.combat, this.props.user)
+      .then((response) => {
+        console.log(response)
+        this.setState({ created: response.data.combat.id })
+      })
+      .catch(console.error)
   }
 
   componentDidMount () {
     const { user } = this.props
     indexCombats(user)
-    // axios({
-    //   url: `${apiUrl}/combats`,
-    //   method: 'get',
-    //   headers: {
-    //     'Authorization': `Bearer ${this.props.user.token}`
-    //   }
-    // })
       .then(res => {
         console.log(res)
         this.setState({ combats: res.data.combats })
@@ -38,8 +62,8 @@ class Combats extends Component {
       combatJSX = 'No combats yet. Make some!'
     } else {
       const combatsList = combats.map(combat => (
-        <li key={combat.id}>
-          <Link to={`/combats/${combat.id}`}>
+        <li key={combat._id}>
+          <Link to={`/combats/${combat._id}`}>
             {combat.title}
           </Link>
         </li>
@@ -55,6 +79,66 @@ class Combats extends Component {
       <div>
         <h1>Combats</h1>
         {combatJSX}
+
+        <form onSubmit={this.handleSubmit}>
+          <label>Title</label>
+          <input
+            placeholder="title"
+            name="title"
+            defaultValue={''}
+            onChange={this.handleChange}
+          />
+          <label>Attacks</label>
+          <input
+            placeholder="numAttacks"
+            name="numAttacks"
+            defaultValue={''}
+            onChange={this.handleChange}
+          />
+          <label>Hit</label>
+          <input
+            placeholder="hit"
+            name="hit"
+            defaultValue={''}
+            onChange={this.handleChange}
+          />
+          <label>Wound</label>
+          <input
+            placeholder="wound"
+            name="wound"
+            defaultValue={''}
+            onChange={this.handleChange}
+          />
+          <label>Rend</label>
+          <input
+            placeholder="rend"
+            name="rend"
+            defaultValue={''}
+            onChange={this.handleChange}
+          />
+          <label>Damage</label>
+          <input
+            placeholder="damage"
+            name="damage"
+            defaultValue={''}
+            onChange={this.handleChange}
+          />
+          <label>Armor</label>
+          <input
+            placeholder="armorSave"
+            name="armorSave"
+            defaultValue={''}
+            onChange={this.handleChange}
+          />
+          <label>FNP</label>
+          <input
+            placeholder="fnp"
+            name="fnp"
+            defaultValue={''}
+            onChange={this.handleChange}
+          />
+          <button type="submit">Submit</button>
+        </form>
       </div>
     )
   }
