@@ -36,13 +36,16 @@ class Combats extends Component {
     const editedCombat = Object.assign(this.state.combat, createdField)
     // 3. Set the state
     this.setState({ combat: editedCombat })
+    console.log(this.state.combat)
   }
-  show = id => {
-    console.log(event.target.id)
-    showCombat(event.target.id)
+  show = () => {
+    console.log(event.target.value)
+    showCombat(event.target.value)
       .then(res => {
         console.log(res)
+        console.log(this.state.combat)
         this.setState({ combat: res.data.combat })
+        console.log(this.state.combat)
       })
       .catch(console.error)
   }
@@ -62,7 +65,7 @@ class Combats extends Component {
       .catch(console.error)
   }
 
-  handleSubmit = (event) => {
+  create = (event) => {
     event.preventDefault()
     createCombat(this.state.combat, this.props.user)
       .then((response) => {
@@ -89,7 +92,6 @@ class Combats extends Component {
     const { user } = this.props
     indexCombats(user)
       .then(res => {
-        console.log(res)
         this.setState({ combats: res.data.combats })
       })
       .catch(console.error)
@@ -104,18 +106,17 @@ class Combats extends Component {
       combatJSX = 'No combats yet. Make some!'
     } else {
       const combatsList = combats.map(combat => (
-        <li key={combat._id}>
-          {combat.title}
-          <button type='submit' id={combat._id} onClick={this.show}>Get</button>
-          <button type='submit' id={combat._id} onClick={this.delete}>Delete</button>
-          <button type='submit' id={combat._id} onClick={this.patch}>Patch</button>
-        </li>
+        <option key={combat._id} value={combat._id}>{combat.title}</option>
       ))
 
       combatJSX = (
-        <ul>
-          {combatsList}
-        </ul>
+        <form>
+          <label>
+            <select onChange={this.show}>
+              {combatsList}
+            </select>
+          </label>
+        </form>
       )
     }
     const rollJSX = (
@@ -135,7 +136,7 @@ class Combats extends Component {
         <h1>Combats</h1>
         {combatJSX}
 
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.create}>
           <label>Title</label>
           <input
             placeholder="title"
