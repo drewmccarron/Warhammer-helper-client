@@ -35,7 +35,10 @@ class Combats extends Component {
   show = id => {
     console.log(event.target.id)
     showCombat(event.target.id)
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res)
+        this.setState({ combat: res.data.combat })
+      })
       .catch(console.error)
   }
 
@@ -107,56 +110,56 @@ class Combats extends Component {
           <input
             placeholder="title"
             name="title"
-            defaultValue={''}
+            value={this.state.combat.title || ''}
             onChange={this.handleChange}
           />
           <label>Attacks</label>
           <input
             placeholder="numAttacks"
             name="numAttacks"
-            defaultValue={''}
+            value={this.state.combat.numAttacks || ''}
             onChange={this.handleChange}
           />
           <label>Hit</label>
           <input
             placeholder="hit"
             name="hit"
-            defaultValue={''}
+            value={this.state.combat.hit || ''}
             onChange={this.handleChange}
           />
           <label>Wound</label>
           <input
             placeholder="wound"
             name="wound"
-            defaultValue={''}
+            value={this.state.combat.wound || ''}
             onChange={this.handleChange}
           />
           <label>Rend</label>
           <input
             placeholder="rend"
             name="rend"
-            defaultValue={''}
+            value={this.state.combat.rend || ''}
             onChange={this.handleChange}
           />
           <label>Damage</label>
           <input
             placeholder="damage"
             name="damage"
-            defaultValue={''}
+            value={this.state.combat.damage || ''}
             onChange={this.handleChange}
           />
           <label>Armor</label>
           <input
             placeholder="armorSave"
             name="armorSave"
-            defaultValue={''}
+            value={this.state.combat.armorSave || ''}
             onChange={this.handleChange}
           />
           <label>FNP</label>
           <input
             placeholder="fnp"
             name="fnp"
-            defaultValue={''}
+            value={this.state.combat.fnp || ''}
             onChange={this.handleChange}
           />
           <button type="submit">Submit</button>
