@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 // import axios from 'axios'
 // import apiUrl from '../../apiConfig'
 import { indexCombats, createCombat, showCombat, deleteCombat, patchCombat } from '../../api/combats'
+import { rollCombat } from '../../functions/diceRoll'
 
 class Combats extends Component {
   constructor () {
@@ -67,6 +68,10 @@ class Combats extends Component {
       .catch(console.error)
   }
 
+  roll = event => {
+    event.preventDefault()
+    rollCombat(this.state.combat)
+  }
   componentDidMount () {
     const { user } = this.props
     indexCombats(user)
@@ -164,6 +169,7 @@ class Combats extends Component {
           />
           <button type="submit">Submit</button>
         </form>
+        <button onClick={this.roll}>Roll</button>
       </div>
     )
   }
