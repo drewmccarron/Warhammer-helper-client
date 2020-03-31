@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 // import axios from 'axios'
 // import apiUrl from '../../apiConfig'
 import { indexCombats, createCombat, showCombat, deleteCombat, patchCombat } from '../../api/combats'
-import { rollCombat } from '../../functions/diceRoll'
+import { hitRolls, woundRolls, saveRolls, damageResult } from '../../functions/diceRoll'
 
 class Combats extends Component {
   constructor () {
@@ -19,6 +19,10 @@ class Combats extends Component {
         armorSave: undefined,
         fnp: undefined
       },
+      hitSuccesses: undefined,
+      woundSuccesses: undefined,
+      saveFails: undefined,
+      finalDamage: undefined,
       created: false
     }
   }
@@ -69,8 +73,17 @@ class Combats extends Component {
   }
 
   roll = event => {
+    const { combat } = this.state
     event.preventDefault()
-    rollCombat(this.state.combat)
+    const numHits = hitRolls(combat.numAttacks, combat.hit)
+    this.setState({ hitSuccesses: numHits })
+    const numWounds = woundRolls(numHits, combat.wound)
+    this.setState({ woundSuccesses: numWounds })
+    const numUnsavedWounds = saveRolls(numWounds, combat.armorSave, combat.rend)
+    this.setState({ saveFails: numUnsavedWounds })
+    const damageInflicted = damageResult(numUnsavedWounds, combat.damage, combat.fnp)
+    this.setState({ finalDamage: damageInflicted })
+    console.log(this.state)
   }
   componentDidMount () {
     const { user } = this.props
@@ -84,7 +97,7 @@ class Combats extends Component {
 
   render () {
     let combatJSX
-    const { combats } = this.state
+    const { combats, hitSuccesses, woundSuccesses, saveFails, finalDamage } = this.state
     if (!combats) {
       combatJSX = 'Loading...'
     } else if (combats.length === 0) {
@@ -105,6 +118,18 @@ class Combats extends Component {
         </ul>
       )
     }
+    const rollJSX = (
+      <div>
+        <h3>Hits</h3>
+        {hitSuccesses}
+        <h3>Wounds</h3>
+        {woundSuccesses}
+        <h3>Unsaved Wounds</h3>
+        {saveFails}
+        <h3>Damage Inflicted</h3>
+        {finalDamage}
+      </div>
+    )
     return (
       <div>
         <h1>Combats</h1>
@@ -170,6 +195,7 @@ class Combats extends Component {
           <button type="submit">Submit</button>
         </form>
         <button onClick={this.roll}>Roll</button>
+        {rollJSX}
       </div>
     )
   }
