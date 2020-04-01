@@ -12,8 +12,12 @@ input[type=text] {
   box-sizing: border-box;
 }
 
-#rollBox {
+#dropDownMenu {
+  width: 30%;
+}
 
+label select {
+  width: 100%;
 }
 
 .rollResult {
@@ -21,4 +25,20 @@ input[type=text] {
   text-align: center;
   width: 20%;
   margin: 0px;
+}
+
+.statInput {
+  display: inline-block;
+  width: 10%;
+  text-align: center;
+  margin: 10px 5px;
+}
+
+.statInput label {
+  margin-bottom: 4px;
+}
+
+.statInput input {
+  width: 60%;
+  text-align: center;
 }

@@ -132,7 +132,7 @@ class Combats extends Component {
 
       combatJSX = (
         <form>
-          <label>
+          <label id='dropDownMenu'>
             <select onChange={this.show}>
               {combatsList}
             </select>
@@ -161,7 +161,7 @@ class Combats extends Component {
             {finalDamage}
           </div>
           <div className='rollResult'>
-            <h4>Avgerage</h4>
+            <h4>Average</h4>
             {averageDamage}
           </div>
         </div>
@@ -171,88 +171,111 @@ class Combats extends Component {
       <div>
         <h1>Combats</h1>
         {combatJSX}
-        <button onClick={this.patch}>Patch</button>
-        <button onClick={this.delete}>Delete</button>
         <form onSubmit={this.create}>
-          <label>Title</label>
-          <input
-            placeholder="title"
-            name="title"
-            type='text'
-            value={this.state.combat.title || ''}
-            onChange={this.handleChange}
-          />
-          <label>Attacks</label>
-          <input
-            placeholder="numAttacks"
-            name="numAttacks"
-            type='number'
-            min='1'
-            max='200'
-            value={this.state.combat.numAttacks || ''}
-            onChange={this.handleChange}
-          />
-          <label>Hit</label>
-          <input
-            placeholder="hit"
-            name="hit"
-            type='number'
-            min='2'
-            max='6'
-            value={this.state.combat.hit || ''}
-            onChange={this.handleChange}
-          />
-          <label>Wound</label>
-          <input
-            placeholder="wound"
-            name="wound"
-            type='number'
-            min='2'
-            max='6'
-            value={this.state.combat.wound || ''}
-            onChange={this.handleChange}
-          />
-          <label>Rend</label>
-          <input
-            placeholder="rend"
-            name="rend"
-            type='number'
-            min='0'
-            max='6'
-            value={this.state.combat.rend || ''}
-            onChange={this.handleChange}
-          />
-          <label>Damage</label>
-          <input
-            placeholder="damage"
-            name="damage"
-            type='number'
-            min='1'
-            max='6'
-            value={this.state.combat.damage || ''}
-            onChange={this.handleChange}
-          />
-          <label>Armor</label>
-          <input
-            placeholder="armorSave"
-            name="armorSave"
-            type='number'
-            min='2'
-            max='7'
-            value={this.state.combat.armorSave || ''}
-            onChange={this.handleChange}
-          />
-          <label>FNP</label>
-          <input
-            placeholder="fnp"
-            name="fnp"
-            type='number'
-            min='2'
-            max='7'
-            value={this.state.combat.fnp || ''}
-            onChange={this.handleChange}
-          />
-          <button type="submit">Submit</button>
+          <div>
+            <label>Title</label>
+            <input
+              placeholder="title"
+              name="title"
+              type='text'
+              value={this.state.combat.title || ''}
+              onChange={this.handleChange}
+            />
+            <button onClick={this.patch}>Save</button>
+            <button type="submit">Save As New</button>
+            <button onClick={this.delete}>Delete</button>
+          </div>
+          <div className='statInput'>
+            <label>Attacks</label>
+            <br></br>
+            <input
+              placeholder="numAttacks"
+              name="numAttacks"
+              type='number'
+              min='1'
+              max='200'
+              value={this.state.combat.numAttacks || ''}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className='statInput'>
+            <label>Hit</label>
+            <br></br>
+            <input
+              placeholder="hit"
+              name="hit"
+              type='number'
+              min='2'
+              max='6'
+              value={this.state.combat.hit || ''}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className='statInput'>
+            <label>Wound</label>
+            <br></br>
+            <input
+              placeholder="wound"
+              name="wound"
+              type='number'
+              min='2'
+              max='6'
+              value={this.state.combat.wound || ''}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className='statInput'>
+            <label>Rend</label>
+            <br></br>
+            <input
+              placeholder="rend"
+              name="rend"
+              type='number'
+              min='0'
+              max='6'
+              value={this.state.combat.rend || ''}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className='statInput'>
+            <label>Damage</label>
+            <br></br>
+            <input
+              placeholder="damage"
+              name="damage"
+              type='number'
+              min='1'
+              max='6'
+              value={this.state.combat.damage || ''}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className='statInput'>
+            <label>Armor</label>
+            <br></br>
+            <input
+              placeholder="armorSave"
+              name="armorSave"
+              type='number'
+              min='2'
+              max='7'
+              value={this.state.combat.armorSave || ''}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className='statInput'>
+            <label>FNP</label>
+            <br></br>
+            <input
+              placeholder="fnp"
+              name="fnp"
+              type='number'
+              min='2'
+              max='7'
+              value={this.state.combat.fnp || ''}
+              onChange={this.handleChange}
+            />
+          </div>
         </form>
         <button onClick={this.roll}>Roll</button>
         {rollJSX}
