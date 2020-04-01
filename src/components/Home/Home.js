@@ -119,6 +119,18 @@ class Combats extends Component {
   }
 
   render () {
+    let crudButtons
+    if (!this.props.user) {
+      crudButtons = 'Sign in to make your own combat profiles'
+    } else {
+      crudButtons = (
+        <div>
+          <button onClick={this.patch}>Save</button>
+          <button type="submit">Save As New</button>
+          <button onClick={this.delete}>Delete</button>
+        </div>)
+    }
+
     let combatJSX
     const { combats, hitSuccesses, woundSuccesses, saveFails, finalDamage, averageDamage } = this.state
     if (!combats) {
@@ -181,9 +193,7 @@ class Combats extends Component {
               value={this.state.combat.title || ''}
               onChange={this.handleChange}
             />
-            <button onClick={this.patch}>Save</button>
-            <button type="submit">Save As New</button>
-            <button onClick={this.delete}>Delete</button>
+            {crudButtons}
           </div>
           <div className='statInput'>
             <label>Attacks</label>
