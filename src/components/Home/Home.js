@@ -31,8 +31,12 @@ class Combats extends Component {
   }
 
   handleChange = (event) => {
+    let value = event.target.value
+    if (event.target.name !== 'title') {
+      value = parseInt(value)
+    }
     const createdField = {
-      [event.target.name]: event.target.value
+      [event.target.name]: value
     }
     const editedCombat = Object.assign(this.state.combat, createdField)
     this.setState({ combat: editedCombat })

@@ -25,7 +25,7 @@ export const woundRolls = function (numHits, woundChar) {
 export const saveRolls = function (numWounds, saveChar, rendChar) {
   let numSaveFails = 0
   for (let i = 0; i < numWounds; i++) {
-    if (rollDie() <= (saveChar + rendChar)) {
+    if (rollDie() < (saveChar + rendChar)) {
       numSaveFails++
     }
   }
@@ -49,13 +49,13 @@ export const average = function (combat) {
   const successChance = function (stat) {
     return 1 - ((stat - 1) / 6)
   }
-  let averageDamage = combat.numAttacks * successChance(parseInt(combat.hit)) * successChance(parseInt(combat.wound))
-  if (parseInt(combat.armorSave) + parseInt(combat.rend) <= 6) {
-    averageDamage = averageDamage * (1 - successChance(parseInt(combat.armorSave) + parseInt(combat.rend)))
+  let averageDamage = combat.numAttacks * successChance(combat.hit) * successChance(combat.wound)
+  if ((combat.armorSave + combat.rend) <= 6) {
+    averageDamage = averageDamage * (1 - successChance(combat.armorSave + combat.rend))
   }
   averageDamage = averageDamage * combat.damage
   if (combat.fnp <= 6) {
-    averageDamage = averageDamage * (1 - successChance(parseInt(combat.fnp)))
+    averageDamage = averageDamage * (1 - successChance(combat.fnp))
   }
   return averageDamage.toFixed(2)
 }
