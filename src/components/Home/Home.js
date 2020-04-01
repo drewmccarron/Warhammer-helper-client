@@ -161,6 +161,9 @@ class Combats extends Component {
           <input
             placeholder="numAttacks"
             name="numAttacks"
+            type='number'
+            min='1'
+            max='200'
             value={this.state.combat.numAttacks || ''}
             onChange={this.handleChange}
           />
@@ -168,6 +171,9 @@ class Combats extends Component {
           <input
             placeholder="hit"
             name="hit"
+            type='number'
+            min='2'
+            max='6'
             value={this.state.combat.hit || ''}
             onChange={this.handleChange}
           />
@@ -175,6 +181,9 @@ class Combats extends Component {
           <input
             placeholder="wound"
             name="wound"
+            type='number'
+            min='2'
+            max='6'
             value={this.state.combat.wound || ''}
             onChange={this.handleChange}
           />
@@ -182,6 +191,9 @@ class Combats extends Component {
           <input
             placeholder="rend"
             name="rend"
+            type='number'
+            min='0'
+            max='6'
             value={this.state.combat.rend || ''}
             onChange={this.handleChange}
           />
@@ -189,6 +201,9 @@ class Combats extends Component {
           <input
             placeholder="damage"
             name="damage"
+            type='number'
+            min='1'
+            max='6'
             value={this.state.combat.damage || ''}
             onChange={this.handleChange}
           />
@@ -196,6 +211,9 @@ class Combats extends Component {
           <input
             placeholder="armorSave"
             name="armorSave"
+            type='number'
+            min='2'
+            max='7'
             value={this.state.combat.armorSave || ''}
             onChange={this.handleChange}
           />
@@ -203,6 +221,9 @@ class Combats extends Component {
           <input
             placeholder="fnp"
             name="fnp"
+            type='number'
+            min='2'
+            max='7'
             value={this.state.combat.fnp || ''}
             onChange={this.handleChange}
           />
