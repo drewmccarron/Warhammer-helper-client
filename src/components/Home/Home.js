@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 // import { Link } from 'react-router-dom'
 // import axios from 'axios'
 // import apiUrl from '../../apiConfig'
+import './Home.css'
 import { indexCombats, createCombat, showCombat, deleteCombat, patchCombat } from '../../api/combats'
 import { hitRolls, woundRolls, saveRolls, damageResult, average } from '../../functions/diceRoll'
 
@@ -163,6 +164,7 @@ class Combats extends Component {
           <input
             placeholder="title"
             name="title"
+            type='text'
             value={this.state.combat.title || ''}
             onChange={this.handleChange}
           />
