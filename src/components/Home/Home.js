@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 // import axios from 'axios'
 // import apiUrl from '../../apiConfig'
 import { indexCombats, createCombat, showCombat, deleteCombat, patchCombat } from '../../api/combats'
-import { hitRolls, woundRolls, saveRolls, damageResult } from '../../functions/diceRoll'
+import { hitRolls, woundRolls, saveRolls, damageResult, average } from '../../functions/diceRoll'
 
 class Combats extends Component {
   constructor () {
@@ -24,18 +24,17 @@ class Combats extends Component {
       woundSuccesses: undefined,
       saveFails: undefined,
       finalDamage: undefined,
-      created: false
+      averageDamage: undefined,
+      created: false,
+      roll: false
     }
   }
 
   handleChange = (event) => {
-    // 1. Create a new object with key of 'name' property on input, value with 'value' property
     const createdField = {
       [event.target.name]: event.target.value
     }
-    // 2. Combine the current `movie` with updatedField
     const editedCombat = Object.assign(this.state.combat, createdField)
-    // 3. Set the state
     this.setState({ combat: editedCombat })
   }
   show = () => {
@@ -75,6 +74,7 @@ class Combats extends Component {
   roll = event => {
     const { combat } = this.state
     event.preventDefault()
+    this.setState({ roll: true })
     const numHits = hitRolls(combat.numAttacks, combat.hit)
     this.setState({ hitSuccesses: numHits })
     const numWounds = woundRolls(numHits, combat.wound)
@@ -83,12 +83,15 @@ class Combats extends Component {
     this.setState({ saveFails: numUnsavedWounds })
     const damageInflicted = damageResult(numUnsavedWounds, combat.damage, combat.fnp)
     this.setState({ finalDamage: damageInflicted })
+    const averageDamage = average(this.state.combat)
+    this.setState({ averageDamage: averageDamage })
   }
   componentDidMount () {
     const { user } = this.props
     indexCombats(user)
       .then(res => {
         this.setState({ combats: res.data.combats })
+        this.setState({ combat: this.state.combats[0] })
       })
       .catch(console.error)
   }
@@ -103,7 +106,7 @@ class Combats extends Component {
 
   render () {
     let combatJSX
-    const { combats, hitSuccesses, woundSuccesses, saveFails, finalDamage } = this.state
+    const { combats, hitSuccesses, woundSuccesses, saveFails, finalDamage, averageDamage } = this.state
     if (!combats) {
       combatJSX = 'Loading...'
     } else if (combats.length === 0) {
@@ -123,18 +126,23 @@ class Combats extends Component {
         </form>
       )
     }
-    const rollJSX = (
-      <div>
-        <h3>Hits</h3>
-        {hitSuccesses}
-        <h3>Wounds</h3>
-        {woundSuccesses}
-        <h3>Unsaved Wounds</h3>
-        {saveFails}
-        <h3>Damage Inflicted</h3>
-        {finalDamage}
-      </div>
-    )
+    let rollJSX
+    if (this.state.roll) {
+      rollJSX = (
+        <div>
+          <h3>Hits</h3>
+          {hitSuccesses}
+          <h3>Wounds</h3>
+          {woundSuccesses}
+          <h3>Unsaved Wounds</h3>
+          {saveFails}
+          <h3>Damage Inflicted</h3>
+          {finalDamage}
+          <h3>Average Damage</h3>
+          {averageDamage}
+        </div>
+      )
+    }
     return (
       <div>
         <h1>Combats</h1>

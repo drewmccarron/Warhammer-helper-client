@@ -9,7 +9,6 @@ export const hitRolls = function (numAttacks, hitChar) {
       numHitSuccesses++
     }
   }
-  console.log('Total hits:' + numHitSuccesses)
   return numHitSuccesses
 }
 
@@ -20,7 +19,6 @@ export const woundRolls = function (numHits, woundChar) {
       numWoundSuccesses++
     }
   }
-  console.log('Total wounds:' + numWoundSuccesses)
   return numWoundSuccesses
 }
 
@@ -31,7 +29,6 @@ export const saveRolls = function (numWounds, saveChar, rendChar) {
       numSaveFails++
     }
   }
-  console.log('Total unsaved wounds:' + numSaveFails)
   return numSaveFails
 }
 
@@ -45,9 +42,22 @@ export const damageResult = function (numUnsaved, damageChar, fnpChar) {
       }
     }
   }
-  console.log('Damage before FNP:' + startingDamage)
-  console.log('Damage after FNP:' + finalDamage)
   return finalDamage
+}
+
+export const average = function (combat) {
+  const successChance = function (stat) {
+    return 1 - ((stat - 1) / 6)
+  }
+  let averageDamage = combat.numAttacks * successChance(parseInt(combat.hit)) * successChance(parseInt(combat.wound))
+  if (parseInt(combat.armorSave) + parseInt(combat.rend) <= 6) {
+    averageDamage = averageDamage * (1 - successChance(parseInt(combat.armorSave) + parseInt(combat.rend)))
+  }
+  averageDamage = averageDamage * combat.damage
+  if (combat.fnp <= 6) {
+    averageDamage = averageDamage * (1 - successChance(parseInt(combat.fnp)))
+  }
+  return averageDamage.toFixed(2)
 }
 
 export const rollCombat = function (combat) {
