@@ -25,7 +25,7 @@ class Combats extends Component {
       saveFails: undefined,
       finalDamage: undefined,
       averageDamage: undefined,
-      created: false,
+      updated: false,
       roll: false
     }
   }
@@ -49,7 +49,10 @@ class Combats extends Component {
   delete = id => {
     event.preventDefault()
     deleteCombat(this.state.combat._id)
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res)
+        this.setState({ updated: true })
+      })
       .then(this.setState({ combat: this.state.combats[0] }))
       .catch(console.error)
   }
@@ -57,7 +60,10 @@ class Combats extends Component {
   patch = (event) => {
     event.preventDefault()
     patchCombat(this.state.combat, this.state.combat._id)
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res)
+        this.setState({ updated: true })
+      })
       .catch(console.error)
   }
 
@@ -66,7 +72,7 @@ class Combats extends Component {
     createCombat(this.state.combat, this.props.user)
       .then((response) => {
         console.log(response)
-        this.setState({ created: response.data.combat.id })
+        this.setState({ updated: true })
       })
       .catch(console.error)
   }
@@ -97,11 +103,14 @@ class Combats extends Component {
   }
   componentDidUpdate () {
     const { user } = this.props
-    indexCombats(user)
-      .then(res => {
-        this.setState({ combats: res.data.combats })
-      })
-      .catch(console.error)
+    if (this.state.updated) {
+      indexCombats(user)
+        .then(res => {
+          this.setState({ combats: res.data.combats })
+          this.setState({ updated: false })
+        })
+        .catch(console.error)
+    }
   }
 
   render () {
