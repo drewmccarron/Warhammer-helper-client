@@ -15,10 +15,13 @@ export const showCombat = id => {
   })
 }
 
-export const deleteCombat = id => {
+export const deleteCombat = (id, user) => {
   return axios({
     method: 'DELETE',
-    url: apiUrl + '/combats/' + id
+    url: apiUrl + '/combats/' + id,
+    headers: {
+      'Authorization': `Token token=${user.token}`
+    }
   })
 }
 
@@ -44,7 +47,7 @@ export const createCombat = (data, user) => {
   })
 }
 
-export const patchCombat = (data, id) => {
+export const patchCombat = (data, id, user) => {
   return axios({
     method: 'PATCH',
     url: apiUrl + '/combats/' + id,
@@ -59,6 +62,9 @@ export const patchCombat = (data, id) => {
         armorSave: data.armorSave,
         fnp: data.fnp
       }
+    },
+    headers: {
+      'Authorization': `Token token=${user.token}`
     }
   })
 }

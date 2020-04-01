@@ -53,7 +53,7 @@ class Combats extends Component {
 
   delete = id => {
     event.preventDefault()
-    deleteCombat(this.state.combat._id)
+    deleteCombat(this.state.combat._id, this.props.user)
       .then(res => {
         console.log(res)
         this.setState({ updated: true })
@@ -64,7 +64,7 @@ class Combats extends Component {
 
   patch = (event) => {
     event.preventDefault()
-    patchCombat(this.state.combat, this.state.combat._id)
+    patchCombat(this.state.combat, this.state.combat._id, this.props.user)
       .then(res => {
         console.log(res)
         this.setState({ updated: true })
