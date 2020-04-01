@@ -1,0 +1,21 @@
+input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+input[type=text] {
+  text-align: left;
+}
+
+#rollBox {
+
+}
+
+.rollResult {
+  display: inline-block;
+  text-align: center;
+  width: 20%;
+  margin: 0px;
+}

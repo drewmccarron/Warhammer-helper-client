@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 // import { Link } from 'react-router-dom'
 // import axios from 'axios'
 // import apiUrl from '../../apiConfig'
+import './Home.css'
 import { indexCombats, createCombat, showCombat, deleteCombat, patchCombat } from '../../api/combats'
 import { hitRolls, woundRolls, saveRolls, damageResult, average } from '../../functions/diceRoll'
 
@@ -142,17 +143,27 @@ class Combats extends Component {
     let rollJSX
     if (this.state.roll) {
       rollJSX = (
-        <div>
-          <h3>Hits</h3>
-          {hitSuccesses}
-          <h3>Wounds</h3>
-          {woundSuccesses}
-          <h3>Unsaved Wounds</h3>
-          {saveFails}
-          <h3>Damage Inflicted</h3>
-          {finalDamage}
-          <h3>Average Damage</h3>
-          {averageDamage}
+        <div id='rollBox'>
+          <div className='rollResult'>
+            <h4>Hits</h4>
+            {hitSuccesses}
+          </div>
+          <div className='rollResult'>
+            <h4>Wounds</h4>
+            {woundSuccesses}
+          </div>
+          <div className='rollResult'>
+            <h4>Unsaved</h4>
+            {saveFails}
+          </div>
+          <div className='rollResult'>
+            <h4>Damage</h4>
+            {finalDamage}
+          </div>
+          <div className='rollResult'>
+            <h4>Avgerage</h4>
+            {averageDamage}
+          </div>
         </div>
       )
     }
@@ -167,6 +178,7 @@ class Combats extends Component {
           <input
             placeholder="title"
             name="title"
+            type='text'
             value={this.state.combat.title || ''}
             onChange={this.handleChange}
           />
