@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 // import axios from 'axios'
 // import apiUrl from '../../apiConfig'
 import './Home.css'
+import messages from '../AutoDismissAlert/messages'
 import { indexCombats, createCombat, showCombat, deleteCombat, patchCombat } from '../../api/combats'
 import { hitRolls, woundRolls, saveRolls, damageResult, average } from '../../functions/diceRoll'
 
@@ -59,6 +60,11 @@ class Combats extends Component {
         this.setState({ updated: true })
       })
       .then(this.setState({ combat: this.state.combats[0] }))
+      .then(() => this.props.msgAlert({
+        heading: 'Delete Success',
+        message: messages.deleteSuccess,
+        variant: 'success'
+      }))
       .catch(console.error)
   }
 
@@ -69,6 +75,11 @@ class Combats extends Component {
         console.log(res)
         this.setState({ updated: true })
       })
+      .then(() => this.props.msgAlert({
+        heading: 'Update Success',
+        message: messages.patchSuccess,
+        variant: 'success'
+      }))
       .catch(console.error)
   }
 
@@ -79,6 +90,11 @@ class Combats extends Component {
         console.log(response)
         this.setState({ updated: true })
       })
+      .then(() => this.props.msgAlert({
+        heading: 'Save Success',
+        message: messages.postSuccess,
+        variant: 'success'
+      }))
       .catch(console.error)
   }
 
