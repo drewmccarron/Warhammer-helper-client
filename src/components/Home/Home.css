@@ -8,3 +8,14 @@ input {
 input[type=text] {
   text-align: left;
 }
+
+#rollBox {
+
+}
+
+.rollResult {
+  display: inline-block;
+  text-align: center;
+  width: 20%;
+  margin: 0px;
+}
