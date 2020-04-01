@@ -11,6 +11,7 @@ class Combats extends Component {
     this.state = {
       combat: {
         title: '',
+        _id: undefined,
         numAttacks: undefined,
         hit: undefined,
         wound: undefined,
@@ -36,31 +37,27 @@ class Combats extends Component {
     const editedCombat = Object.assign(this.state.combat, createdField)
     // 3. Set the state
     this.setState({ combat: editedCombat })
-    console.log(this.state.combat)
   }
   show = () => {
-    console.log(event.target.value)
     showCombat(event.target.value)
       .then(res => {
-        console.log(res)
-        console.log(this.state.combat)
         this.setState({ combat: res.data.combat })
-        console.log(this.state.combat)
+        console.log(this.state)
       })
       .catch(console.error)
   }
 
   delete = id => {
     event.preventDefault()
-    console.log(event.target.id)
-    deleteCombat(event.target.id)
+    deleteCombat(this.state.combat._id)
       .then(res => console.log(res))
+      .then(this.setState({ combat: this.state.combats[0] }))
       .catch(console.error)
   }
 
   patch = (event) => {
     event.preventDefault()
-    patchCombat(this.state.combat, event.target.id)
+    patchCombat(this.state.combat, this.state.combat._id)
       .then(res => console.log(res))
       .catch(console.error)
   }
@@ -86,9 +83,16 @@ class Combats extends Component {
     this.setState({ saveFails: numUnsavedWounds })
     const damageInflicted = damageResult(numUnsavedWounds, combat.damage, combat.fnp)
     this.setState({ finalDamage: damageInflicted })
-    console.log(this.state)
   }
   componentDidMount () {
+    const { user } = this.props
+    indexCombats(user)
+      .then(res => {
+        this.setState({ combats: res.data.combats })
+      })
+      .catch(console.error)
+  }
+  componentDidUpdate () {
     const { user } = this.props
     indexCombats(user)
       .then(res => {
@@ -135,7 +139,8 @@ class Combats extends Component {
       <div>
         <h1>Combats</h1>
         {combatJSX}
-
+        <button onClick={this.patch}>Patch</button>
+        <button onClick={this.delete}>Delete</button>
         <form onSubmit={this.create}>
           <label>Title</label>
           <input
