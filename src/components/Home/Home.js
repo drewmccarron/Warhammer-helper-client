@@ -138,13 +138,13 @@ class Combats extends Component {
   render () {
     let crudButtons
     if (!this.props.user) {
-      crudButtons = 'Sign in to make your own combat profiles'
+      crudButtons = 'Sign in to manage your own profiles'
     } else {
       crudButtons = (
         <div>
-          <Button className='crudButtons' variant="success" onClick={this.patch}>Save</Button>
-          <Button className='crudButtons' variant="success" type="submit">Save As New</Button>
-          <Button className='crudButtons' variant="danger" onClick={this.delete}>Delete</Button>
+          <Button className='crudButtons' variant="success" size='sm' onClick={this.patch}>Save</Button>
+          <Button className='crudButtons' variant="success" size='sm'type="submit">Save As New</Button>
+          <Button className='crudButtons' variant="danger" size='sm' onClick={this.delete}>Delete</Button>
         </div>)
     }
 
@@ -200,8 +200,8 @@ class Combats extends Component {
       <div>
         <h2>Combat Simulator</h2>
         {combatJSX}
-        <form id='titleInput' onSubmit={this.create}>
-          <div>
+        <form onSubmit={this.create}>
+          <div id='titleInput'>
             <input
               placeholder="title"
               name="title"
@@ -211,7 +211,7 @@ class Combats extends Component {
             />
             {crudButtons}
           </div>
-          <div className='statInput'>
+          <div id='firstStatInput' className='statInput'>
             <label>Attacks</label>
             <br></br>
             <input
@@ -254,7 +254,7 @@ class Combats extends Component {
             <label>Rend</label>
             <br></br>
             <input
-              placeholder="rend"
+              placeholder="n/a"
               name="rend"
               type='number'
               min='0'
