@@ -10,6 +10,8 @@ input[type=text] {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  width: 17%;
+  margin-right: 10px;
 }
 
 #dropDownMenu {
@@ -17,7 +19,7 @@ input[type=text] {
 }
 
 label select {
-  width: 100%;
+  width: 57%;
 }
 
 .rollResult {
@@ -29,9 +31,9 @@ label select {
 
 .statInput {
   display: inline-block;
-  width: 10%;
+  width: 8%;
   text-align: center;
-  margin: 10px 5px;
+  margin: 10px 0px;
 }
 
 .statInput label {

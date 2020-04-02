@@ -197,11 +197,10 @@ class Combats extends Component {
     }
     return (
       <div>
-        <h1>Combats</h1>
+        <h2>Combat Simulator</h2>
         {combatJSX}
-        <form onSubmit={this.create}>
+        <form id='titleInput' onSubmit={this.create}>
           <div>
-            <label>Title</label>
             <input
               placeholder="title"
               name="title"
