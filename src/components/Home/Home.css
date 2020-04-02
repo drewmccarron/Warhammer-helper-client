@@ -12,6 +12,7 @@ input[type=text] {
   box-sizing: border-box;
   width: 17%;
   margin-right: 10px;
+  margin-left: 4px;
 }
 
 #dropDownMenu {
@@ -20,6 +21,7 @@ input[type=text] {
 
 label select {
   width: 57%;
+  margin-left: 4px;
 }
 
 .rollResult {
@@ -33,14 +35,22 @@ label select {
   display: inline-block;
   width: 8%;
   text-align: center;
-  margin: 10px 0px;
+  margin: 0px 0px 10px;
 }
 
 .statInput label {
-  margin-bottom: 4px;
+  margin: 4px 0px;
 }
 
 .statInput input {
   width: 60%;
   text-align: center;
+}
+
+.crudButtons {
+  margin: 6px 4px;
+}
+
+#rollButton {
+  margin-left: 4px;
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 // import { Link } from 'react-router-dom'
 // import axios from 'axios'
 // import apiUrl from '../../apiConfig'
+import Button from 'react-bootstrap/Button'
 import './Home.css'
 import messages from '../AutoDismissAlert/messages'
 import { indexCombats, createCombat, showCombat, deleteCombat, patchCombat } from '../../api/combats'
@@ -141,9 +142,9 @@ class Combats extends Component {
     } else {
       crudButtons = (
         <div>
-          <button onClick={this.patch}>Save</button>
-          <button type="submit">Save As New</button>
-          <button onClick={this.delete}>Delete</button>
+          <Button className='crudButtons' variant="success" onClick={this.patch}>Save</Button>
+          <Button className='crudButtons' variant="success" type="submit">Save As New</Button>
+          <Button className='crudButtons' variant="danger" onClick={this.delete}>Delete</Button>
         </div>)
     }
 
@@ -302,7 +303,7 @@ class Combats extends Component {
             />
           </div>
         </form>
-        <button onClick={this.roll}>Roll</button>
+        <Button id='rollButton' onClick={this.roll}>Roll</Button>
         {rollJSX}
       </div>
     )
