@@ -289,7 +289,7 @@ class Combats extends Component {
               onChange={this.handleChange}
             />
           </div>
-          <div className='statInput'>
+          <div title='Set to 7 to disables FNP rolls' className='statInput'>
             <label>FNP</label>
             <br></br>
             <input
