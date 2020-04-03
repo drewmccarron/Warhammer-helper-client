@@ -2,10 +2,10 @@
 
 [Deployed API](https://murmuring-cove-24551.herokuapp.com/)
 
-[BackEnd Reop](https://github.com/drewmccarron/Warhammer-helper-api)
+[Backend Repo](https://github.com/drewmccarron/Warhammer-helper-api)
 
 
-**About the App**
+## About the App
 
 This is a damage calculator and combat simulator for the popular tabletop franchise, Warhammer. It is compatible with both versions of the game, Warhammer: 40,000 and Warhammer: Age of Sigmar.
 
@@ -13,25 +13,33 @@ Users can input units' offensive and defensive stats into to the app in order to
 
 Users are able to manage collections of saved combat scenarios, allowing users to input and compare the results of multiple different units.
 
-**Technologies Used (Frontend)**
+## Technologies Used (Frontend)
 
 <ol>
-Front-end:
 <li>HTML5</li>
 <li>CSS3</li>
 <li>JavaScript (ES6)</li>
+<li>Node.js</li>
 <li>React</li>
 <li>Bootstrap</li>
 <li>Axios</li>
 </ol>
 
-**Design**
+## Installation
+
+To run locally, run the following in terminal from the project directory:
+```sh
+npm install
+npm run start
+```
+
+## Design
 
 [Wireframe](https://i.imgur.com/5cu32Df.png)
 
 [Live App](https://i.imgur.com/bJWlMMo.png)
 
-**User Stories**
+## User Stories
 
 - As a user, I want to be able to sign up.
 - As a user, I want to be able to sign in.
@@ -47,7 +55,7 @@ Front-end:
 - As a user, I want to be able to roll an example combat phase using a saved combat scenario and see the results, including the total number of hits, wounds saves, and the resulting damage.
 - As a user, I want to be able to see the average, expected damage of a given combat scenario.
 
-**Development Process**
+## Development Process
 
 Development began by outlining the core functions that I wanted to app to achieve. Namely, I wanted users to be able to input unit statistics from Warhammer so that they can replicate the combats phase from the game. To do this, I needed to create two things:
 
@@ -68,11 +76,11 @@ Once data could be exchanged between the frontend and backened, work could begin
 
 Upon completion of the algorithm, basic styling was used to present the necessary parts of the app in an efficient and concise display. There are many parts that a user needs to interact with, so limiting unnecessary visual elements helped keep the the app from appearing overwhelmingly complicated.
 
-**Unsolved Issues**
+## Unsolved Issues
 
 1. Currently, Rend values of 0 empty the form, rather than displaying the number '0'.
 
-**Future Features**
+## Future Features
 
 1. Implement reroll modifiers for hits rolls, wound rolls, saves rolls, and fnp rolls. This includes rerolling rolls of 1 and rerolling fails tests.
 2. Implement 'on a roll of 6' effects, including mortal wounds (damage that bypasses save rolls) and 'exploding 6s' (i.e. multiple successful hits resulting from a hit roll test)
