@@ -79,6 +79,7 @@ Upon completion of the algorithm, basic styling was used to present the necessar
 ## Unsolved Issues
 
 1. Currently, Rend values of 0 empty the form, rather than displaying the number '0'.
+2. Failed 'Delete' attempts reset the current combat to the first one in the dropdown.
 
 ## Future Features
 
