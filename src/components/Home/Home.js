@@ -48,7 +48,6 @@ class Combats extends Component {
     showCombat(event.target.value)
       .then(res => {
         this.setState({ combat: res.data.combat })
-        console.log(this.state)
       })
       .catch(console.error)
   }
@@ -57,7 +56,6 @@ class Combats extends Component {
     event.preventDefault()
     deleteCombat(this.state.combat._id, this.props.user)
       .then(res => {
-        console.log(res)
         this.setState({ updated: true })
       })
       .then(this.setState({ combat: this.state.combats[0] }))
@@ -73,7 +71,6 @@ class Combats extends Component {
     event.preventDefault()
     patchCombat(this.state.combat, this.state.combat._id, this.props.user)
       .then(res => {
-        console.log(res)
         this.setState({ updated: true })
       })
       .then(() => this.props.msgAlert({
@@ -88,7 +85,6 @@ class Combats extends Component {
     event.preventDefault()
     createCombat(this.state.combat, this.props.user)
       .then((response) => {
-        console.log(response)
         this.setState({ updated: true })
       })
       .then(() => this.props.msgAlert({
