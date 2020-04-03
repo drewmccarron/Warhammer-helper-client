@@ -80,6 +80,7 @@ Upon completion of the algorithm, basic styling was used to present the necessar
 
 1. Currently, Rend values of 0 empty the form, rather than displaying the number '0'.
 2. Failed 'Delete' attempts reset the current combat to the first one in the dropdown.
+3. 'Home' button currently does not function properly in the production app, even though it works locally.
 
 ## Future Features
 
