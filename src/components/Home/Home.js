@@ -64,7 +64,13 @@ class Combats extends Component {
         message: messages.deleteSuccess,
         variant: 'success'
       }))
-      .catch(console.error)
+      .catch(error => {
+        this.props.msgAlert({
+          heading: 'Deletion failed with error: ' + error.message,
+          message: messages.deleteFailure,
+          variant: 'danger'
+        })
+      })
   }
 
   patch = (event) => {
@@ -78,7 +84,13 @@ class Combats extends Component {
         message: messages.patchSuccess,
         variant: 'success'
       }))
-      .catch(console.error)
+      .catch(error => {
+        this.props.msgAlert({
+          heading: 'Save failed with error: ' + error.message,
+          message: messages.patchFailure,
+          variant: 'danger'
+        })
+      })
   }
 
   create = (event) => {
@@ -92,7 +104,13 @@ class Combats extends Component {
         message: messages.postSuccess,
         variant: 'success'
       }))
-      .catch(console.error)
+      .catch(error => {
+        this.props.msgAlert({
+          heading: 'Save failed with error: ' + error.message,
+          message: messages.postFailure,
+          variant: 'danger'
+        })
+      })
   }
 
   roll = event => {
