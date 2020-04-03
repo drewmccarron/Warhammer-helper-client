@@ -65,6 +65,5 @@ export const rollCombat = function (combat) {
   const numWounds = woundRolls(numHits, combat.wound)
   const numUnsavedWounds = saveRolls(numWounds, combat.armorSave, combat.rend)
   const damageInflicted = numUnsavedWounds(numUnsavedWounds, combat.damage, combat.fnp)
-  console.log('Final combat damage:' + damageInflicted)
   return damageInflicted
 }
