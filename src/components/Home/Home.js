@@ -153,12 +153,17 @@ class Combats extends Component {
     let crudButtons
     if (!this.props.user) {
       crudButtons = 'Sign in to manage your own profiles'
-    } else {
+    } else if (this.props.user._id === this.state.combat.owner) {
       crudButtons = (
         <div>
           <Button className='crudButtons' variant="success" size='sm' onClick={this.patch}>Save</Button>
           <Button className='crudButtons' variant="success" size='sm'type="submit">Save As New</Button>
           <Button className='crudButtons' variant="danger" size='sm' onClick={this.delete}>Delete</Button>
+        </div>)
+    } else {
+      crudButtons = (
+        <div>
+          <Button className='crudButtons' variant="success" size='sm'type="submit">Save As New</Button>
         </div>)
     }
 
