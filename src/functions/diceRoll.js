@@ -27,13 +27,19 @@ export const hitRolls = function (numAttacks, hitChar) {
   return numHitSuccesses
 }
 
+// for each attack that successfully hits, roll to see if it successfully wounds
 export const woundRolls = function (numHits, woundChar) {
+  // the final number of attacks that successfully wound
   let numWoundSuccesses = 0
+  // attack a number of times equal to the number of successful hits
   for (let i = 0; i < numHits; i++) {
+    // for each hit, compare a die roll to the unit's wound characteristic. If the roll is greater than or equal to the wound characteristic, the attack successfully wounds
     if (rollDie() >= woundChar) {
+      // if the attack wounds, add 1 to the number of successful wounds
       numWoundSuccesses++
     }
   }
+  // return the number of successful wounds
   return numWoundSuccesses
 }
 
