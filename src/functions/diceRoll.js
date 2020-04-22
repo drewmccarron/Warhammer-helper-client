@@ -11,13 +11,19 @@ export const rollDie = function () {
 // 4. If the attack is not saved, the attacker inflicts damage equal to their damage characteristic.
 // 5. If the defending unit has an FNP ('Feel no pain') characteristic, for each point of damage inflicted, roll to see if the damage is negated by an FNP save.
 
+// for each attack, check to see if it hits
 export const hitRolls = function (numAttacks, hitChar) {
+  // the final number of attacks that successfully hit
   let numHitSuccesses = 0
+  // attack a number of times equal to the unit's attack characteristic
   for (let i = 0; i < numAttacks; i++) {
+    // for each attack, compare a die roll to the unit's hit characteristic. If the roll is greater than or equal to the hit characteristic, the attack successfully hits
     if (rollDie() >= hitChar) {
+      // if the attack hits, add 1 to the number of successful hits
       numHitSuccesses++
     }
   }
+  // return the number of successful hits
   return numHitSuccesses
 }
 
