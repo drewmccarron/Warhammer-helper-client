@@ -62,7 +62,7 @@ export const saveRolls = function (numWounds, saveChar, rendChar) {
 
 // for each failed save, inflict damage equal to the attacker's damage characteristic. Then, if applicable, roll to negate the damage with the defender's FNP characteristic
 export const damageResult = function (numUnsaved, damageChar, fnpChar) {
-  // the final final damage inflicted before FNP saves
+  // the final damage inflicted before FNP saves
   const startingDamage = numUnsaved * damageChar
   let finalDamage = startingDamage
   // if the defending unit has an FNP save (i.e. 2 <= fnpChar <= 6)
