@@ -43,13 +43,20 @@ export const woundRolls = function (numHits, woundChar) {
   return numWoundSuccesses
 }
 
+// for each attack that successfully wounds, roll to see if it is saved (i.e. negated by the defender's armor)
 export const saveRolls = function (numWounds, saveChar, rendChar) {
+  // the final number of attacks that are NOT saved
   let numSaveFails = 0
+  // roll a number of times equal to the number of successful wounds
   for (let i = 0; i < numWounds; i++) {
+    // for each wound, compare a die roll to the defending unit's save characteristic (i.e. armor value) plus the attacking unit's rend characteristic (i.e. armor-piercing value).
+    // If the roll is greater than or equal to the modified save characteristic, the attack is successfully saved by the defender's armor. If it the modified save characteristic is LOWER than the die roll, the save fails.
     if (rollDie() < (saveChar + rendChar)) {
+      // if the wound is NOT saved, add 1 to the number of failed saves
       numSaveFails++
     }
   }
+  // return the number of failed saves
   return numSaveFails
 }
 
