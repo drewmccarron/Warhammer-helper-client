@@ -30,7 +30,9 @@ class Combats extends Component {
       saveFails: undefined,
       finalDamage: undefined,
       averageDamage: undefined,
+      // used to refresh the page (mostly the dropdown) after changes
       updated: false,
+      // used to check if the page should display roll results
       roll: false
     }
   }
@@ -239,6 +241,7 @@ class Combats extends Component {
         <h2>Combat Simulator</h2>
         {combatJSX}
         <form onSubmit={this.create}>
+          {/* title */}
           <div id='titleInput'>
             <input
               placeholder="title"
@@ -250,6 +253,7 @@ class Combats extends Component {
             {crudButtons}
           </div>
           <div id='firstStatInput' className='statInput'>
+            {/* number of attacks */}
             <label>Attacks</label>
             <br></br>
             <input
@@ -263,6 +267,7 @@ class Combats extends Component {
             />
           </div>
           <div className='statInput'>
+            {/* hit characteristic */}
             <label>Hit</label>
             <br></br>
             <input
@@ -276,6 +281,7 @@ class Combats extends Component {
             />
           </div>
           <div className='statInput'>
+            {/* wound characteristic */}
             <label>Wound</label>
             <br></br>
             <input
@@ -289,6 +295,7 @@ class Combats extends Component {
             />
           </div>
           <div className='statInput'>
+            {/* rend characteristic */}
             <label>Rend</label>
             <br></br>
             <input
@@ -302,6 +309,7 @@ class Combats extends Component {
             />
           </div>
           <div className='statInput'>
+            {/* damage characteristic */}
             <label>Damage</label>
             <br></br>
             <input
@@ -315,6 +323,7 @@ class Combats extends Component {
             />
           </div>
           <div className='statInput'>
+            {/* armor characteristic */}
             <label>Armor</label>
             <br></br>
             <input
@@ -328,6 +337,7 @@ class Combats extends Component {
             />
           </div>
           <div title='Set to 7 to disables FNP rolls' className='statInput'>
+            {/* FNP characteristic */}
             <label>FNP</label>
             <br></br>
             <input
@@ -342,6 +352,7 @@ class Combats extends Component {
           </div>
         </form>
         <Button id='rollButton' onClick={this.roll}>Roll</Button>
+        {/* displayed after clicking the roll button */}
         {rollJSX}
       </div>
     )
