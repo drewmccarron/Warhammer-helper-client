@@ -1,6 +1,15 @@
+// the function used to simulate a six-sided die roll
 export const rollDie = function () {
+  // Return a random number between 0 and 5, then add 1 to get a 1-6 range
   return Math.floor(Math.random() * 6) + 1
 }
+
+// The warhammer combat sequence goes likes this:
+// 1. For each attack, roll to see if the attack hits. If it does, continue.
+// 2. If the attack hits, roll to see if the attack wounds. If it does, continue.
+// 3. If the attack wounds, the defending unit rolls to see if they 'save' the attack with their armor. The attacking unit's rend lessens the defender's chance to do an armor save. If the attack is NOT saved, continue.
+// 4. If the attack is not saved, the attacker inflicts damage equal to their damage characteristic.
+// 5. If the defending unit has an FNP ('Feel no pain') characteristic, for each point of damage inflicted, roll to see if the damage is negated by an FNP save.
 
 export const hitRolls = function (numAttacks, hitChar) {
   let numHitSuccesses = 0
