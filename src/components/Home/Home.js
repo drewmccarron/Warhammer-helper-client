@@ -12,6 +12,7 @@ class Combats extends Component {
   constructor () {
     super()
     this.state = {
+      // matches the keys of the saved combat profile objetcs
       combat: {
         title: '',
         _id: undefined,
@@ -23,6 +24,7 @@ class Combats extends Component {
         armorSave: undefined,
         fnp: undefined
       },
+      // used for the damage calculator
       hitSuccesses: undefined,
       woundSuccesses: undefined,
       saveFails: undefined,
@@ -32,18 +34,22 @@ class Combats extends Component {
       roll: false
     }
   }
-
+  // updates the state when the form values are updated
   handleChange = (event) => {
     let value = event.target.value
+    // Converts all string values from the forms into numbers for the calculator
     if (event.target.name !== 'title') {
       value = parseInt(value)
     }
     const createdField = {
       [event.target.name]: value
     }
+    // replaces previous state value with the value input into the form
     const editedCombat = Object.assign(this.state.combat, createdField)
     this.setState({ combat: editedCombat })
   }
+  // called by selecting a combat profile from the dropdown menu
+  // replaces the previous state values with those of the selected profile
   show = () => {
     showCombat(event.target.value)
       .then(res => {
@@ -51,7 +57,7 @@ class Combats extends Component {
       })
       .catch(console.error)
   }
-
+  // deletes a combat profile
   delete = id => {
     event.preventDefault()
     deleteCombat(this.state.combat._id, this.props.user)
@@ -72,7 +78,7 @@ class Combats extends Component {
         })
       })
   }
-
+  // updates a combat profile
   patch = (event) => {
     event.preventDefault()
     patchCombat(this.state.combat, this.state.combat._id, this.props.user)
@@ -92,7 +98,7 @@ class Combats extends Component {
         })
       })
   }
-
+  // creates a new combat profile
   create = (event) => {
     event.preventDefault()
     createCombat(this.state.combat, this.props.user)
@@ -112,17 +118,22 @@ class Combats extends Component {
         })
       })
   }
-
+  // function used for the damage calculator
   roll = event => {
     const { combat } = this.state
     event.preventDefault()
+    // the 'roll' value is checked to display the calculated results
     this.setState({ roll: true })
+    // pass the attack and hit characteristics into the hit roll function
     const numHits = hitRolls(combat.numAttacks, combat.hit)
     this.setState({ hitSuccesses: numHits })
+    // pass the number of successful hits and the wound characteristic into the wound roll function
     const numWounds = woundRolls(numHits, combat.wound)
     this.setState({ woundSuccesses: numWounds })
+    // pass the number of successful wounds, armor characteristic, and rend characteristic into the save roll function
     const numUnsavedWounds = saveRolls(numWounds, combat.armorSave, combat.rend)
     this.setState({ saveFails: numUnsavedWounds })
+    // pass the number of failed saves, the damage characteristics, and fnp characteristic into the damage function
     const damageInflicted = damageResult(numUnsavedWounds, combat.damage, combat.fnp)
     this.setState({ finalDamage: damageInflicted })
     const averageDamage = average(this.state.combat)
@@ -137,6 +148,7 @@ class Combats extends Component {
       })
       .catch(console.error)
   }
+  // update the dropdown menu on all changes
   componentDidUpdate () {
     const { user } = this.props
     if (this.state.updated) {
@@ -151,16 +163,20 @@ class Combats extends Component {
 
   render () {
     let crudButtons
+    // if the user is not signed in, display this message instead of the CRUD buttons
     if (!this.props.user) {
       crudButtons = 'Sign in to manage your own profiles'
+      // if the selected combat profile belongs to the user, display all of the relevant crud functions
     } else if (this.props.user._id === this.state.combat.owner) {
       crudButtons = (
+        // these buttons patch, post, and delete combat profiles, respectively
         <div>
           <Button className='crudButtons' variant="success" size='sm' onClick={this.patch}>Save</Button>
           <Button className='crudButtons' variant="success" size='sm'type="submit">Save As New</Button>
           <Button className='crudButtons' variant="danger" size='sm' onClick={this.delete}>Delete</Button>
         </div>)
     } else {
+      // if the selected combat profile does not belong to the user, only display the Post button and don't display the useless Patch and Delete buttons
       crudButtons = (
         <div>
           <Button className='crudButtons' variant="success" size='sm'type="submit">Save As New</Button>
@@ -175,10 +191,12 @@ class Combats extends Component {
       combatJSX = 'No combats yet. Make some!'
     } else {
       const combatsList = combats.map(combat => (
+        // the value attribute is used to pass the selected combat profile's id to the show function
         <option key={combat._id} value={combat._id}>{combat.title}</option>
       ))
 
       combatJSX = (
+        // call the show() function and update the state on selecting a combat profile
         <form>
           <label id='dropDownMenu'>
             <select onChange={this.show}>
@@ -188,6 +206,7 @@ class Combats extends Component {
         </form>
       )
     }
+    // click the Roll button to call the relevant functions and display the results
     let rollJSX
     if (this.state.roll) {
       rollJSX = (
