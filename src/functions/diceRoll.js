@@ -79,21 +79,33 @@ export const damageResult = function (numUnsaved, damageChar, fnpChar) {
   return finalDamage
 }
 
+// the function used to calculate the average inflicted damage
 export const average = function (combat) {
+  // used to convert a stat characteristic into it's percentage chance to succeed.
+  // e.g. a 6+ stat has a 1/6 chance to succeed on it's roll, or 13.33%. The same goes for 5+ (33.33%), 4+ (50%), etc.
   const successChance = function (stat) {
     return 1 - ((stat - 1) / 6)
   }
+  // multiply the number of attacks by their chance to succeed, then multiply that by the hits' chances to wound
   let averageDamage = combat.numAttacks * successChance(combat.hit) * successChance(combat.wound)
+  // if the defender still has a save characteristic after applying the attacker's rend characteristic
   if ((combat.armorSave + combat.rend) <= 6) {
+    // multply the current result (the average number of wounds) by the chance that the defender successfully saves their wounds
+    // the result is the average number of failed saves
     averageDamage = averageDamage * (1 - successChance(combat.armorSave + combat.rend))
   }
+  // multply the average number of failed saves by the attacker's damage characteristic
   averageDamage = averageDamage * combat.damage
+  // if the defender has an FNP characteristic
   if (combat.fnp <= 6) {
+    // multiply the inflicted by the chance that chance that the defender successeeds their FNP roles
     averageDamage = averageDamage * (1 - successChance(combat.fnp))
   }
+  // the resulting average final damage inflicted after taking FNPs into account
   return averageDamage.toFixed(2)
 }
 
+// this function is used to test the total combat sequence. It is not used in the live app
 export const rollCombat = function (combat) {
   const numHits = hitRolls(combat.numAttacks, combat.hit)
   const numWounds = woundRolls(numHits, combat.wound)
