@@ -60,16 +60,22 @@ export const saveRolls = function (numWounds, saveChar, rendChar) {
   return numSaveFails
 }
 
+// for each failed save, inflict damage equal to the attacker's damage characteristic. Then, if applicable, roll to negate the damage with the defender's FNP characteristic
 export const damageResult = function (numUnsaved, damageChar, fnpChar) {
+  // the final final damage inflicted before FNP saves
   const startingDamage = numUnsaved * damageChar
   let finalDamage = startingDamage
+  // if the defending unit has an FNP save (i.e. 2 <= fnpChar <= 6)
   if (fnpChar < 7) {
+    // roll for each damage inflicted
     for (let i = 0; i < startingDamage; i++) {
+      // for each damage inflicted, compare a die roll to the defending unit's FNP characteristic. If the roll is greater than or equal to the FNP characteristic, lessen the final inflicted damage by 1 (i.e. negate that point of damage)
       if (rollDie() >= fnpChar) {
         finalDamage--
       }
     }
   }
+  // return the final damage after FNP saves
   return finalDamage
 }
 
