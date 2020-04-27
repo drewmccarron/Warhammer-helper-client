@@ -63,10 +63,11 @@ const testCombat = {
   fnp: 7
 }
 
-const data = []
+// const data = []
 
-const createDataPoint = function () {
-  for (let i = 0; i < 10; i++) {
+export const createDataPoint = function () {
+  const data = []
+  for (let i = 0; i < 100; i++) {
     const combatResult = rollCombat(testCombat)
     const dataPointExists = data.some(dataPoint => dataPoint.name === combatResult.toString())
     if (dataPointExists) {
@@ -81,8 +82,10 @@ const createDataPoint = function () {
     }
   }
   data.sort((a, b) => (parseInt(a.name) > parseInt(b.name)) ? 1 : -1)
+  console.log(data)
+  return data
 }
 
 createDataPoint()
 
-console.log(data)
+// console.log(data)
