@@ -72,7 +72,6 @@ const createDataPoint = function () {
     if (dataPointExists) {
       const dataPointIndex = data.findIndex(dataPoint => dataPoint.name === combatResult.toString())
       data[dataPointIndex].frequency++
-      // dataPointIndex.frequency = dataPointIndex.frequency + 1
     } else {
       const newDataPoint = {
         name: combatResult.toString(),
@@ -81,6 +80,7 @@ const createDataPoint = function () {
       data.push(newDataPoint)
     }
   }
+  data.sort((a, b) => (parseInt(a.name) > parseInt(b.name)) ? 1 : -1)
 }
 
 createDataPoint()
