@@ -66,14 +66,21 @@ const testCombat = {
 const data = []
 
 const createDataPoint = function () {
-  const combatResult = rollCombat(testCombat)
-  // const dataPointExists = data.some(dataPoint => dataPoint.name === combatResult.toString())
-  const newDataPoint = {
-    name: combatResult.toString(),
-    frequency: 1
+  for (let i = 0; i < 10; i++) {
+    const combatResult = rollCombat(testCombat)
+    const dataPointExists = data.some(dataPoint => dataPoint.name === combatResult.toString())
+    if (dataPointExists) {
+      const dataPointIndex = data.findIndex(dataPoint => dataPoint.name === combatResult.toString())
+      data[dataPointIndex].frequency++
+      // dataPointIndex.frequency = dataPointIndex.frequency + 1
+    } else {
+      const newDataPoint = {
+        name: combatResult.toString(),
+        frequency: 1
+      }
+      data.push(newDataPoint)
+    }
   }
-  console.log(newDataPoint)
-  data.push(newDataPoint)
 }
 
 createDataPoint()
