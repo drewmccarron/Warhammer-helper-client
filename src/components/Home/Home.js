@@ -1,15 +1,11 @@
 import React, { Component } from 'react'
-// import { Link } from 'react-router-dom'
-// import axios from 'axios'
-// import apiUrl from '../../apiConfig'
 import Button from 'react-bootstrap/Button'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts'
 import './Home.css'
 import messages from '../AutoDismissAlert/messages'
 import { indexCombats, createCombat, showCombat, deleteCombat, patchCombat } from '../../api/combats'
-import { hitRolls, woundRolls, saveRolls, damageResult, average, createDataPoint } from '../../functions/diceRoll'
+import { createDataPoint } from '../../functions/diceRoll'
 import DefaultTooltipContent from 'recharts/lib/component/DefaultTooltipContent'
-// import { createDataPoint } from '../../functions/graph'
 
 const CustomTooltip = props => {
   // payload[0] doesn't exist when tooltip isn't visible
@@ -47,16 +43,11 @@ class Combats extends Component {
         armorSave: undefined,
         fnp: undefined
       },
-      // used for the damage calculator
-      hitSuccesses: undefined,
-      woundSuccesses: undefined,
-      saveFails: undefined,
-      finalDamage: undefined,
-      averageDamage: undefined,
       // used to refresh the page (mostly the dropdown) after changes
       updated: false,
       // used to check if the page should display roll results
       roll: false,
+      // data passed into the graph
       data: undefined
     }
   }
@@ -146,24 +137,9 @@ class Combats extends Component {
   }
   // function used for the damage calculator
   roll = event => {
-    const { combat } = this.state
     event.preventDefault()
     // the 'roll' value is checked to display the calculated results
     this.setState({ roll: true })
-    // pass the attack and hit characteristics into the hit roll function
-    const numHits = hitRolls(combat.numAttacks, combat.hit)
-    this.setState({ hitSuccesses: numHits })
-    // pass the number of successful hits and the wound characteristic into the wound roll function
-    const numWounds = woundRolls(numHits, combat.wound)
-    this.setState({ woundSuccesses: numWounds })
-    // pass the number of successful wounds, armor characteristic, and rend characteristic into the save roll function
-    const numUnsavedWounds = saveRolls(numWounds, combat.armorSave, combat.rend)
-    this.setState({ saveFails: numUnsavedWounds })
-    // pass the number of failed saves, the damage characteristics, and fnp characteristic into the damage function
-    const damageInflicted = damageResult(numUnsavedWounds, combat.damage, combat.fnp)
-    this.setState({ finalDamage: damageInflicted })
-    const averageDamage = average(this.state.combat)
-    this.setState({ averageDamage: averageDamage })
     this.setState({ data: createDataPoint(this.state.combat) })
   }
   componentDidMount () {
@@ -211,7 +187,7 @@ class Combats extends Component {
     }
 
     let combatJSX
-    const { combats, hitSuccesses, woundSuccesses, saveFails, finalDamage, averageDamage } = this.state
+    const { combats } = this.state
     if (!combats) {
       combatJSX = 'Loading...'
     } else if (combats.length === 0) {
@@ -238,26 +214,6 @@ class Combats extends Component {
     if (this.state.roll) {
       rollJSX = (
         <div id='rollBox'>
-          <div className='rollResult'>
-            <h4>Hits</h4>
-            {hitSuccesses}
-          </div>
-          <div className='rollResult'>
-            <h4>Wounds</h4>
-            {woundSuccesses}
-          </div>
-          <div className='rollResult'>
-            <h4>Unsaved</h4>
-            {saveFails}
-          </div>
-          <div className='rollResult'>
-            <h4>Damage</h4>
-            {finalDamage}
-          </div>
-          <div className='rollResult'>
-            <h4>Average</h4>
-            {averageDamage}
-          </div>
           <BarChart
             width={500}
             height={300}
