@@ -10,8 +10,6 @@ import { indexCombats, createCombat, showCombat, deleteCombat, patchCombat } fro
 import { hitRolls, woundRolls, saveRolls, damageResult, average } from '../../functions/diceRoll'
 import { createDataPoint } from '../../functions/graph'
 
-const data = createDataPoint()
-
 class Combats extends Component {
   constructor () {
     super()
@@ -37,7 +35,8 @@ class Combats extends Component {
       // used to refresh the page (mostly the dropdown) after changes
       updated: false,
       // used to check if the page should display roll results
-      roll: false
+      roll: false,
+      data: undefined
     }
   }
   // updates the state when the form values are updated
@@ -144,6 +143,7 @@ class Combats extends Component {
     this.setState({ finalDamage: damageInflicted })
     const averageDamage = average(this.state.combat)
     this.setState({ averageDamage: averageDamage })
+    this.setState({ data: createDataPoint() })
   }
   componentDidMount () {
     const { user } = this.props
@@ -240,7 +240,7 @@ class Combats extends Component {
           <BarChart
             width={500}
             height={300}
-            data={data}
+            data={this.state.data}
             margin={{
               top: 5, right: 30, left: 20, bottom: 5
             }}
