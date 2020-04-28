@@ -110,6 +110,27 @@ export const rollCombat = function (combat) {
   const numHits = hitRolls(combat.numAttacks, combat.hit)
   const numWounds = woundRolls(numHits, combat.wound)
   const numUnsavedWounds = saveRolls(numWounds, combat.armorSave, combat.rend)
-  const damageInflicted = numUnsavedWounds(numUnsavedWounds, combat.damage, combat.fnp)
+  const damageInflicted = damageResult(numUnsavedWounds, combat.damage, combat.fnp)
   return damageInflicted
+}
+
+export const createDataPoint = function (combat) {
+  const data = []
+  for (let i = 0; i < 100; i++) {
+    const combatResult = rollCombat(combat)
+    const dataPointExists = data.some(dataPoint => dataPoint.name === combatResult.toString())
+    if (dataPointExists) {
+      const dataPointIndex = data.findIndex(dataPoint => dataPoint.name === combatResult.toString())
+      data[dataPointIndex].frequency++
+    } else {
+      const newDataPoint = {
+        name: combatResult.toString(),
+        frequency: 1
+      }
+      data.push(newDataPoint)
+    }
+  }
+  data.sort((a, b) => (parseInt(a.name) > parseInt(b.name)) ? 1 : -1)
+  console.log(data)
+  return data
 }

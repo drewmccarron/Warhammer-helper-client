@@ -53,22 +53,22 @@ const rollCombat = function (combat) {
   return damageInflicted
 }
 
-const testCombat = {
-  numAttacks: 20,
-  hit: 3,
-  wound: 3,
-  rend: 1,
-  damage: 2,
-  armorSave: 4,
-  fnp: 7
-}
+// const testCombat = {
+//   numAttacks: 20,
+//   hit: 3,
+//   wound: 3,
+//   rend: 1,
+//   damage: 2,
+//   armorSave: 4,
+//   fnp: 7
+// }
 
 // const data = []
 
-export const createDataPoint = function () {
+export const createDataPoint = function (combat) {
   const data = []
   for (let i = 0; i < 100; i++) {
-    const combatResult = rollCombat(testCombat)
+    const combatResult = rollCombat(combat)
     const dataPointExists = data.some(dataPoint => dataPoint.name === combatResult.toString())
     if (dataPointExists) {
       const dataPointIndex = data.findIndex(dataPoint => dataPoint.name === combatResult.toString())

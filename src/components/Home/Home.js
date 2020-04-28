@@ -7,8 +7,8 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'rec
 import './Home.css'
 import messages from '../AutoDismissAlert/messages'
 import { indexCombats, createCombat, showCombat, deleteCombat, patchCombat } from '../../api/combats'
-import { hitRolls, woundRolls, saveRolls, damageResult, average } from '../../functions/diceRoll'
-import { createDataPoint } from '../../functions/graph'
+import { hitRolls, woundRolls, saveRolls, damageResult, average, createDataPoint } from '../../functions/diceRoll'
+// import { createDataPoint } from '../../functions/graph'
 
 class Combats extends Component {
   constructor () {
@@ -143,7 +143,7 @@ class Combats extends Component {
     this.setState({ finalDamage: damageInflicted })
     const averageDamage = average(this.state.combat)
     this.setState({ averageDamage: averageDamage })
-    this.setState({ data: createDataPoint() })
+    this.setState({ data: createDataPoint(this.state.combat) })
   }
   componentDidMount () {
     const { user } = this.props
