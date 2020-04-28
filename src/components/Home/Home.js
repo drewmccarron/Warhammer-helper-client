@@ -8,7 +8,28 @@ import './Home.css'
 import messages from '../AutoDismissAlert/messages'
 import { indexCombats, createCombat, showCombat, deleteCombat, patchCombat } from '../../api/combats'
 import { hitRolls, woundRolls, saveRolls, damageResult, average, createDataPoint } from '../../functions/diceRoll'
+import DefaultTooltipContent from 'recharts/lib/component/DefaultTooltipContent'
 // import { createDataPoint } from '../../functions/graph'
+
+const CustomTooltip = props => {
+  // payload[0] doesn't exist when tooltip isn't visible
+  if (props.payload[0] != null) {
+    // mutating props directly is against react's conventions
+    // so we create a new payload with the name and value fields set to what we want
+    const newPayload = [
+      ...props.payload,
+      {
+        name: 'Chance of achieving: ' + props.payload[0].payload.percentile + '%'
+      }
+    ]
+
+    // we render the default, but with our overridden payload
+    return <DefaultTooltipContent {...props} payload={newPayload} />
+  }
+
+  // we just render the default
+  return <DefaultTooltipContent {...props} />
+}
 
 class Combats extends Component {
   constructor () {
@@ -248,7 +269,7 @@ class Combats extends Component {
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" />
             <YAxis />
-            <Tooltip />
+            <Tooltip content={<CustomTooltip />} />
             <Legend />
             <Bar dataKey="frequency" fill="#82ca9d" />
           </BarChart>
