@@ -117,29 +117,42 @@ export const rollCombat = function (combat) {
 
 export const createDataPoint = function (combat) {
   const data = []
+  // the sample size for the data
   const numRepeats = 10000
+  // for each data points, roll for a combat scenario and check the damage
   for (let i = 0; i < numRepeats; i++) {
     const combatResult = rollCombat(combat)
+    // check to see if that damage results has occured
     const dataPointExists = data.some(dataPoint => dataPoint.name === combatResult.toString())
+    // if the damage result has already occured...
     if (dataPointExists) {
+      // increase the frequency of that result by 1 (i.e. the number of times it has occured)
       const dataPointIndex = data.findIndex(dataPoint => dataPoint.name === combatResult.toString())
       data[dataPointIndex].frequency++
+      // if the damage result has not yet occured
     } else {
+      // create a new data point for that damage result with frequency 1
       const newDataPoint = {
         name: combatResult.toString(),
         frequency: 1
       }
+      // add the new datapoint to the data array
       data.push(newDataPoint)
     }
   }
+  // sort the data array by damage (e.g. 0, 1, 2, 3... )
   data.sort((a, b) => (parseInt(a.name) > parseInt(b.name)) ? 1 : -1)
+  // for each datapoint, add a new 'percentile' key
   data.forEach(function (dataPoint, index) {
+    // the total frequencies of all dataPoints in the data array before this one
     let totalFrequency = 0
+    // create a new array of all of the dataPoints before this one
     data.slice(0, index).forEach(item => {
+      // add the frequencies together
       totalFrequency += item.frequency
     })
+    // calculate the total percentile as 100% - (the sum of frequencies / the sample size)
     data[index].percentile = (100 * (1 - (totalFrequency / numRepeats))).toFixed(2)
   })
-  console.log(data)
   return data
 }
