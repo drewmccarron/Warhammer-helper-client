@@ -116,7 +116,8 @@ export const rollCombat = function (combat) {
 
 export const createDataPoint = function (combat) {
   const data = []
-  for (let i = 0; i < 100; i++) {
+  const numRepeats = 10000
+  for (let i = 0; i < numRepeats; i++) {
     const combatResult = rollCombat(combat)
     const dataPointExists = data.some(dataPoint => dataPoint.name === combatResult.toString())
     if (dataPointExists) {
@@ -131,6 +132,13 @@ export const createDataPoint = function (combat) {
     }
   }
   data.sort((a, b) => (parseInt(a.name) > parseInt(b.name)) ? 1 : -1)
+  data.forEach(function (dataPoint, index) {
+    let totalFrequency = dataPoint.frequency
+    data.slice(0, index).forEach(item => {
+      totalFrequency += item.frequency
+    })
+    data[index].percentile = (100 * (1 - (totalFrequency / numRepeats))).toFixed(2)
+  })
   console.log(data)
   return data
 }
