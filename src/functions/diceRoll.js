@@ -133,7 +133,7 @@ export const createDataPoint = function (combat) {
   }
   data.sort((a, b) => (parseInt(a.name) > parseInt(b.name)) ? 1 : -1)
   data.forEach(function (dataPoint, index) {
-    let totalFrequency = dataPoint.frequency
+    let totalFrequency = 0
     data.slice(0, index).forEach(item => {
       totalFrequency += item.frequency
     })
