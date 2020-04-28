@@ -80,6 +80,7 @@ export const damageResult = function (numUnsaved, damageChar, fnpChar) {
 }
 
 // the function used to calculate the average inflicted damage
+// this is not longer used in the live app
 export const average = function (combat) {
   // used to convert a stat characteristic into it's percentage chance to succeed.
   // e.g. a 6+ stat has a 1/6 chance to succeed on it's roll, or 13.33%. The same goes for 5+ (33.33%), 4+ (50%), etc.
@@ -105,7 +106,7 @@ export const average = function (combat) {
   return averageDamage.toFixed(2)
 }
 
-// this function is used to test the total combat sequence. It is not used in the live app
+// this function is used to simulate the total combat sequence and return the resulting final damage
 export const rollCombat = function (combat) {
   const numHits = hitRolls(combat.numAttacks, combat.hit)
   const numWounds = woundRolls(numHits, combat.wound)
