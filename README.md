@@ -54,7 +54,7 @@ npm install rechart
 - As a user, I want to be able to delete a saved combat scenario.
 - As a user, I want to be able to update a saved combat scenario.
 
-- As a user, I want to be able to roll an example combat phase using a saved combat scenario and see the expected results.
+- As a user, I want to be able to roll an example combat phase using a saved combat scenario and see a distribution of possible results.
 
 ## Development Process
 
@@ -88,6 +88,14 @@ Upon completion of the algorithm, basic styling was used to present the necessar
 2. Implement 'on a roll of 6' effects, including mortal wounds (damage that bypasses save rolls) and 'exploding 6s' (i.e. multiple successful hits resulting from a hit roll test)
 3. Implement the ability to have multiple profiles active at the same time for calulating damage and simulating combat (e.g. A single unit hitting with two different weapons)
 4. Add a toggle-able button to switch between 40,000 and Age of Sigmar rules. This would include changing the term 'rend' to 'AP' in the app, as well as adding an Invulnerabiltiy Save characteristic to the combats.
+
+## Potential Updates:
+
+1. Design updates. This includes:
+- Replacing the numeric form inputs with clickable dice that will toggle between related dice values.
+- Centering more aspects of the app
+- Making the app mobile-friendly
+2. Separate Defensive and Offensive values into different savable values so that a user can switch between both an attacking unit's and a defending unit's stats.
 
 ## Update History
 
