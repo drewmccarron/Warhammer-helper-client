@@ -9,7 +9,7 @@
 
 This is a damage calculator and combat simulator for the popular tabletop franchise, Warhammer. It is compatible with both versions of the game, Warhammer: 40,000 and Warhammer: Age of Sigmar.
 
-Users can input units' offensive and defensive stats into to the app in order to determine the expected result of a combat scenario. Additionally, users are able to make an example combat using those stats.
+Users can input units' offensive and defensive stats into to the app in order to determine the expected result of a combat scenario. Additionally, users are able to make an example combat using those stats. Users are then able to use those stats to see a frequency distribution of the possible results of those comabts to estimate their likelihood of achieving certain results.
 
 Users are able to manage collections of saved combat scenarios, allowing users to input and compare the results of multiple different units.
 
@@ -23,6 +23,7 @@ Users are able to manage collections of saved combat scenarios, allowing users t
 <li>React</li>
 <li>Bootstrap</li>
 <li>Axios</li>
+<li>Rechart</li>
 </ol>
 
 ## Installation
@@ -31,6 +32,7 @@ To run locally, run the following in terminal from the project directory:
 ```sh
 npm install
 npm run start
+npm install rechart
 ```
 
 ## Design
@@ -85,3 +87,7 @@ Upon completion of the algorithm, basic styling was used to present the necessar
 1. Implement reroll modifiers for hits rolls, wound rolls, saves rolls, and fnp rolls. This includes rerolling rolls of 1 and rerolling fails tests.
 2. Implement 'on a roll of 6' effects, including mortal wounds (damage that bypasses save rolls) and 'exploding 6s' (i.e. multiple successful hits resulting from a hit roll test)
 3. Implement the ability to have multiple profiles active at the same time for calulating damage and simulating combat (e.g. A single unit hitting with two different weapons)
+
+## Update History
+
+4/29: Added a Rechart graph that those a frequency distribution of possible results of a given combat. This feature replaces the previous hit, wound, saves, damage, and average damage values that were previously displayed.
