@@ -87,6 +87,7 @@ Upon completion of the algorithm, basic styling was used to present the necessar
 1. Implement reroll modifiers for hits rolls, wound rolls, saves rolls, and fnp rolls. This includes rerolling rolls of 1 and rerolling fails tests.
 2. Implement 'on a roll of 6' effects, including mortal wounds (damage that bypasses save rolls) and 'exploding 6s' (i.e. multiple successful hits resulting from a hit roll test)
 3. Implement the ability to have multiple profiles active at the same time for calulating damage and simulating combat (e.g. A single unit hitting with two different weapons)
+4. Add a toggle-able button to switch between 40,000 and Age of Sigmar rules. This would include changing the term 'rend' to 'AP' in the app, as well as adding an Invulnerabiltiy Save characteristic to the combats.
 
 ## Update History
 
