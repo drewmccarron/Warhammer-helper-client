@@ -9,7 +9,7 @@
 
 This is a damage calculator and combat simulator for the popular tabletop franchise, Warhammer. It is compatible with both versions of the game, Warhammer: 40,000 and Warhammer: Age of Sigmar.
 
-Users can input units' offensive and defensive stats into to the app in order to determine the expected result of a combat scenario. Additionally, users are able to make an example combat using those stats, which will show the number of successful hit rolls, successful wound rolls, failed save rolls, and the resulting damage.
+Users can input units' offensive and defensive stats into to the app in order to determine the expected result of a combat scenario. Additionally, users are able to make an example combat using those stats.
 
 Users are able to manage collections of saved combat scenarios, allowing users to input and compare the results of multiple different units.
 
@@ -52,8 +52,7 @@ npm run start
 - As a user, I want to be able to delete a saved combat scenario.
 - As a user, I want to be able to update a saved combat scenario.
 
-- As a user, I want to be able to roll an example combat phase using a saved combat scenario and see the results, including the total number of hits, wounds saves, and the resulting damage.
-- As a user, I want to be able to see the average, expected damage of a given combat scenario.
+- As a user, I want to be able to roll an example combat phase using a saved combat scenario and see the expected results.
 
 ## Development Process
 
@@ -80,11 +79,9 @@ Upon completion of the algorithm, basic styling was used to present the necessar
 
 1. Currently, Rend values of 0 empty the form, rather than displaying the number '0'.
 2. Failed 'Delete' attempts reset the current combat to the first one in the dropdown.
-3. 'Home' button currently does not function properly in the production app, even though it works locally.
 
 ## Future Features
 
 1. Implement reroll modifiers for hits rolls, wound rolls, saves rolls, and fnp rolls. This includes rerolling rolls of 1 and rerolling fails tests.
 2. Implement 'on a roll of 6' effects, including mortal wounds (damage that bypasses save rolls) and 'exploding 6s' (i.e. multiple successful hits resulting from a hit roll test)
 3. Implement the ability to have multiple profiles active at the same time for calulating damage and simulating combat (e.g. A single unit hitting with two different weapons)
-4. Implement a graphic representation of expected damage frequency distribution, rather than just the mean value (i.e. Show the likelihoods of getting specific damage results on a graph).
