@@ -9,12 +9,14 @@ const rerollDie = function (statChar, rerollChar) {
   let dieRoll = rollDie()
   if (alreadyRerolled === false && dieRoll < 2 && rerollChar === 1) {
     alreadyRerolled = true
+    console.log('rerolling 1')
     dieRoll = rollDie()
-    console.log('rerolling roll of 1')
+    console.log(dieRoll)
   } else if (alreadyRerolled === false && dieRoll < statChar && rerollChar === 2) {
     alreadyRerolled = true
+    console.log('roll of ' + dieRoll + ' failed. reroll result =')
     dieRoll = rollDie()
-    console.log('rerolling failed roll')
+    console.log(dieRoll)
   }
   return dieRoll
 }
@@ -27,6 +29,7 @@ const rerollDie = function (statChar, rerollChar) {
 
 // for each attack, check to see if it hits
 const hitRolls = function (combat) {
+  console.log('at hit function')
   // the final number of attacks that successfully hit
   let numHitSuccesses = 0
   // attack a number of times equal to the unit's attack characteristic
@@ -43,6 +46,7 @@ const hitRolls = function (combat) {
 
 // for each attack that successfully hits, roll to see if it successfully wounds
 const woundRolls = function (numHits, combat) {
+  console.log('at wound function')
   // the final number of attacks that successfully wound
   let numWoundSuccesses = 0
   // attack a number of times equal to the number of successful hits
@@ -59,6 +63,7 @@ const woundRolls = function (numHits, combat) {
 
 // for each attack that successfully wounds, roll to see if it is saved (i.e. negated by the defender's armor)
 const saveRolls = function (numWounds, combat) {
+  console.log('at save function')
   // the final number of attacks that are NOT saved
   let numSaveFails = 0
   // roll a number of times equal to the number of successful wounds
@@ -76,6 +81,7 @@ const saveRolls = function (numWounds, combat) {
 
 // for each failed save, inflict damage equal to the attacker's damage characteristic. Then, if applicable, roll to negate the damage with the defender's FNP characteristic
 const damageResult = function (numUnsaved, combat) {
+  console.log('at damage function')
   // the final damage inflicted before FNP saves
   const startingDamage = numUnsaved * combat.damage
   let finalDamage = startingDamage
@@ -105,7 +111,7 @@ const rollCombat = function (combat) {
 const createDataPoint = function (combat) {
   const data = []
   // the sample size for the data
-  const numRepeats = 20
+  const numRepeats = 1
   // for each data points, roll for a combat scenario and check the damage
   for (let i = 0; i < numRepeats; i++) {
     const combatResult = rollCombat(combat)
@@ -147,18 +153,17 @@ const createDataPoint = function (combat) {
 
 const testCombat = {
   title: '',
-  _id: undefined,
-  numAttacks: undefined,
-  hit: undefined,
-  hitReroll: 1,
-  wound: undefined,
-  woundReroll: 1,
-  rend: undefined,
-  damage: undefined,
-  armorSave: undefined,
-  armorSaveReroll: 1,
-  fnp: undefined,
-  fnpReroll: 1
+  numAttacks: 20,
+  hit: 4,
+  hitReroll: 2,
+  wound: 4,
+  woundReroll: 2,
+  rend: 1,
+  damage: 2,
+  armorSave: 5,
+  armorSaveReroll: 2,
+  fnp: 7,
+  fnpReroll: 0
 }
 
 createDataPoint(testCombat)
