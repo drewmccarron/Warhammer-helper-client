@@ -37,11 +37,15 @@ class Combats extends Component {
         _id: undefined,
         numAttacks: undefined,
         hit: undefined,
+        hitReroll: undefined,
         wound: undefined,
+        woundReroll: undefined,
         rend: undefined,
         damage: undefined,
         armorSave: undefined,
-        fnp: undefined
+        armorSaveReroll: undefined,
+        fnp: undefined,
+        fnpReroll: undefined
       },
       // used to refresh the page (mostly the dropdown) after changes
       updated: false,
@@ -64,6 +68,18 @@ class Combats extends Component {
     // replaces previous state value with the value input into the form
     const editedCombat = Object.assign(this.state.combat, createdField)
     this.setState({ combat: editedCombat })
+    console.log(this.state.combat)
+  }
+  updateReroll = event => {
+    console.log(event.target.value)
+    console.log(event.target.name)
+    const value = event.target.value
+    const createdField = {
+      [event.target.name]: value
+    }
+    const editedCombat = Object.assign(this.state.combat, createdField)
+    this.setState({ combat: editedCombat })
+    console.log(this.state.combat)
   }
   // called by selecting a combat profile from the dropdown menu
   // replaces the previous state values with those of the selected profile
@@ -276,6 +292,15 @@ class Combats extends Component {
               onChange={this.handleChange}
             />
           </div>
+          <div>
+            <label>
+              <select name='hitReroll' onChange={this.updateReroll}>
+                <option value='0'>No rerolls</option>
+                <option value='1'>Roll 1s</option>
+                <option value='2'>Roll Failed Hits</option>
+              </select>
+            </label>
+          </div>
           <div className='statInput'>
             {/* wound characteristic */}
             <label>Wound</label>
@@ -303,6 +328,15 @@ class Combats extends Component {
               value={this.state.combat.rend || ''}
               onChange={this.handleChange}
             />
+          </div>
+          <div>
+            <label>
+              <select name='woundReroll' onChange={this.updateReroll}>
+                <option value='0'>No rerolls</option>
+                <option value='1'>Roll 1s</option>
+                <option value='2'>Roll Failed Hits</option>
+              </select>
+            </label>
           </div>
           <div className='statInput'>
             {/* damage characteristic */}
@@ -332,6 +366,15 @@ class Combats extends Component {
               onChange={this.handleChange}
             />
           </div>
+          <div>
+            <label>
+              <select name='armorSaveReroll' onChange={this.updateReroll}>
+                <option value='0'>No rerolls</option>
+                <option value='1'>Roll 1s</option>
+                <option value='2'>Roll Failed Hits</option>
+              </select>
+            </label>
+          </div>
           <div title='Set to 7 to disables FNP rolls' className='statInput'>
             {/* FNP characteristic */}
             <label>FNP</label>
@@ -345,6 +388,15 @@ class Combats extends Component {
               value={this.state.combat.fnp || ''}
               onChange={this.handleChange}
             />
+          </div>
+          <div>
+            <label>
+              <select name='fnpReroll' onChange={this.updateReroll}>
+                <option value='0'>No rerolls</option>
+                <option value='1'>Roll 1s</option>
+                <option value='2'>Roll Failed Hits</option>
+              </select>
+            </label>
           </div>
         </form>
         <Button id='rollButton' onClick={this.roll}>Roll</Button>
