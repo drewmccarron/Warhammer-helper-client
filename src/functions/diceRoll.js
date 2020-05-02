@@ -12,13 +12,13 @@ export const rollDie = function () {
 // 5. If the defending unit has an FNP ('Feel no pain') characteristic, for each point of damage inflicted, roll to see if the damage is negated by an FNP save.
 
 // for each attack, check to see if it hits
-export const hitRolls = function (numAttacks, hitChar) {
+export const hitRolls = function (combat) {
   // the final number of attacks that successfully hit
   let numHitSuccesses = 0
   // attack a number of times equal to the unit's attack characteristic
-  for (let i = 0; i < numAttacks; i++) {
+  for (let i = 0; i < combat.numAttacks; i++) {
     // for each attack, compare a die roll to the unit's hit characteristic. If the roll is greater than or equal to the hit characteristic, the attack successfully hits
-    if (rollDie() >= hitChar) {
+    if (rollDie() >= combat.hit) {
       // if the attack hits, add 1 to the number of successful hits
       numHitSuccesses++
     }
@@ -28,13 +28,13 @@ export const hitRolls = function (numAttacks, hitChar) {
 }
 
 // for each attack that successfully hits, roll to see if it successfully wounds
-export const woundRolls = function (numHits, woundChar) {
+export const woundRolls = function (numHits, combat) {
   // the final number of attacks that successfully wound
   let numWoundSuccesses = 0
   // attack a number of times equal to the number of successful hits
   for (let i = 0; i < numHits; i++) {
     // for each hit, compare a die roll to the unit's wound characteristic. If the roll is greater than or equal to the wound characteristic, the attack successfully wounds
-    if (rollDie() >= woundChar) {
+    if (rollDie() >= combat.wound) {
       // if the attack wounds, add 1 to the number of successful wounds
       numWoundSuccesses++
     }
@@ -44,14 +44,14 @@ export const woundRolls = function (numHits, woundChar) {
 }
 
 // for each attack that successfully wounds, roll to see if it is saved (i.e. negated by the defender's armor)
-export const saveRolls = function (numWounds, saveChar, rendChar) {
+export const saveRolls = function (numWounds, combat) {
   // the final number of attacks that are NOT saved
   let numSaveFails = 0
   // roll a number of times equal to the number of successful wounds
   for (let i = 0; i < numWounds; i++) {
     // for each wound, compare a die roll to the defending unit's save characteristic (i.e. armor value) plus the attacking unit's rend characteristic (i.e. armor-piercing value).
     // If the roll is greater than or equal to the modified save characteristic, the attack is successfully saved by the defender's armor. If it the modified save characteristic is LOWER than the die roll, the save fails.
-    if (rollDie() < (saveChar + rendChar)) {
+    if (rollDie() < (combat.armorSave + combat.rend)) {
       // if the wound is NOT saved, add 1 to the number of failed saves
       numSaveFails++
     }
@@ -61,16 +61,16 @@ export const saveRolls = function (numWounds, saveChar, rendChar) {
 }
 
 // for each failed save, inflict damage equal to the attacker's damage characteristic. Then, if applicable, roll to negate the damage with the defender's FNP characteristic
-export const damageResult = function (numUnsaved, damageChar, fnpChar) {
+export const damageResult = function (numUnsaved, combat) {
   // the final damage inflicted before FNP saves
-  const startingDamage = numUnsaved * damageChar
+  const startingDamage = numUnsaved * combat.damage
   let finalDamage = startingDamage
   // if the defending unit has an FNP save (i.e. 2 <= fnpChar <= 6)
-  if (fnpChar < 7) {
+  if (combat.fnp < 7) {
     // roll for each damage inflicted
     for (let i = 0; i < startingDamage; i++) {
       // for each damage inflicted, compare a die roll to the defending unit's FNP characteristic. If the roll is greater than or equal to the FNP characteristic, lessen the final inflicted damage by 1 (i.e. negate that point of damage)
-      if (rollDie() >= fnpChar) {
+      if (rollDie() >= combat.fnp) {
         finalDamage--
       }
     }
@@ -108,10 +108,10 @@ export const average = function (combat) {
 
 // this function is used to simulate the total combat sequence and return the resulting final damage
 export const rollCombat = function (combat) {
-  const numHits = hitRolls(combat.numAttacks, combat.hit)
-  const numWounds = woundRolls(numHits, combat.wound)
-  const numUnsavedWounds = saveRolls(numWounds, combat.armorSave, combat.rend)
-  const damageInflicted = damageResult(numUnsavedWounds, combat.damage, combat.fnp)
+  const numHits = hitRolls(combat)
+  const numWounds = woundRolls(numHits, combat)
+  const numUnsavedWounds = saveRolls(numWounds, combat)
+  const damageInflicted = damageResult(numUnsavedWounds, combat)
   return damageInflicted
 }
 
