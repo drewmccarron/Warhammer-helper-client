@@ -7,7 +7,9 @@ export const rollDie = function () {
 export const rerollDie = function (statChar, rerollChar) {
   let alreadyRerolled = false
   let dieRoll = rollDie()
-  if (alreadyRerolled === false && dieRoll < 2 && rerollChar === 1) {
+  if (!rerollChar) {
+    return dieRoll
+  } else if (alreadyRerolled === false && dieRoll < 2 && rerollChar === 1) {
     alreadyRerolled = true
     dieRoll = rollDie()
   } else if (alreadyRerolled === false && dieRoll < statChar && rerollChar === 2) {
