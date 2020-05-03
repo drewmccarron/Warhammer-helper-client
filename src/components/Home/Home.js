@@ -71,15 +71,12 @@ class Combats extends Component {
     console.log(this.state.combat)
   }
   updateReroll = event => {
-    console.log(event.target.value)
-    console.log(event.target.name)
-    const value = event.target.value
+    const value = parseInt(event.target.value)
     const createdField = {
       [event.target.name]: value
     }
     const editedCombat = Object.assign(this.state.combat, createdField)
     this.setState({ combat: editedCombat })
-    console.log(this.state.combat)
   }
   // called by selecting a combat profile from the dropdown menu
   // replaces the previous state values with those of the selected profile
@@ -334,7 +331,7 @@ class Combats extends Component {
               <select name='woundReroll' onChange={this.updateReroll}>
                 <option value='0'>No rerolls</option>
                 <option value='1'>Roll 1s</option>
-                <option value='2'>Roll Failed Hits</option>
+                <option value='2'>Roll Failed Wounds</option>
               </select>
             </label>
           </div>
@@ -371,7 +368,7 @@ class Combats extends Component {
               <select name='armorSaveReroll' onChange={this.updateReroll}>
                 <option value='0'>No rerolls</option>
                 <option value='1'>Roll 1s</option>
-                <option value='2'>Roll Failed Hits</option>
+                <option value='2'>Roll Failed Armor Saves</option>
               </select>
             </label>
           </div>
@@ -394,7 +391,7 @@ class Combats extends Component {
               <select name='fnpReroll' onChange={this.updateReroll}>
                 <option value='0'>No rerolls</option>
                 <option value='1'>Roll 1s</option>
-                <option value='2'>Roll Failed Hits</option>
+                <option value='2'>Roll Failed FNP Rolls</option>
               </select>
             </label>
           </div>
