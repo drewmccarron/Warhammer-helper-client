@@ -309,6 +309,13 @@ class Combats extends Component {
               value={this.state.combat.wound || ''}
               onChange={this.handleChange}
             />
+            <label>
+              <select name='woundReroll' onChange={this.updateReroll}>
+                <option value='0'>No rerolls</option>
+                <option value='1'>Roll 1s</option>
+                <option value='2'>Roll Failed Wounds</option>
+              </select>
+            </label>
           </div>
           <div className='statInput'>
             {/* rend characteristic */}
@@ -323,13 +330,6 @@ class Combats extends Component {
               value={this.state.combat.rend || ''}
               onChange={this.handleChange}
             />
-            <label>
-              <select name='woundReroll' onChange={this.updateReroll}>
-                <option value='0'>No rerolls</option>
-                <option value='1'>Roll 1s</option>
-                <option value='2'>Roll Failed Wounds</option>
-              </select>
-            </label>
           </div>
           <div className='statInput'>
             {/* damage characteristic */}
