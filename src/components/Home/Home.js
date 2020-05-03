@@ -288,8 +288,6 @@ class Combats extends Component {
               value={this.state.combat.hit || ''}
               onChange={this.handleChange}
             />
-          </div>
-          <div>
             <label>
               <select name='hitReroll' onChange={this.updateReroll}>
                 <option value='0'>No rerolls</option>
@@ -325,8 +323,6 @@ class Combats extends Component {
               value={this.state.combat.rend || ''}
               onChange={this.handleChange}
             />
-          </div>
-          <div>
             <label>
               <select name='woundReroll' onChange={this.updateReroll}>
                 <option value='0'>No rerolls</option>
@@ -362,8 +358,6 @@ class Combats extends Component {
               value={this.state.combat.armorSave || ''}
               onChange={this.handleChange}
             />
-          </div>
-          <div>
             <label>
               <select name='armorSaveReroll' onChange={this.updateReroll}>
                 <option value='0'>No rerolls</option>
@@ -385,8 +379,6 @@ class Combats extends Component {
               value={this.state.combat.fnp || ''}
               onChange={this.handleChange}
             />
-          </div>
-          <div>
             <label>
               <select name='fnpReroll' onChange={this.updateReroll}>
                 <option value='0'>No rerolls</option>
