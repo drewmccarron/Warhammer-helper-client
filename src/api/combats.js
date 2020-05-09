@@ -34,11 +34,15 @@ export const createCombat = (data, user) => {
         title: data.title,
         numAttacks: data.numAttacks,
         hit: data.hit,
+        hitReroll: data.hitReroll,
         wound: data.wound,
+        woundReroll: data.woundReroll,
         rend: data.rend,
         damage: data.damage,
         armorSave: data.armorSave,
-        fnp: data.fnp
+        armorSaveReroll: data.armorSaveReroll,
+        fnp: data.fnp,
+        fnpReroll: data.fnpReroll
       }
     },
     headers: {
