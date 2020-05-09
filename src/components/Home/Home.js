@@ -68,7 +68,6 @@ class Combats extends Component {
     // replaces previous state value with the value input into the form
     const editedCombat = Object.assign(this.state.combat, createdField)
     this.setState({ combat: editedCombat })
-    console.log(this.state.combat)
   }
   updateReroll = event => {
     const value = parseInt(event.target.value)
