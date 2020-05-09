@@ -262,130 +262,129 @@ class Combats extends Component {
             {crudButtons}
           </div>
           <div id='firstStatInput' className='statInput'>
-            {/* number of attacks */}
-            <label>Attacks</label>
-            <br></br>
-            <input
-              placeholder="numAttacks"
-              name="numAttacks"
-              type='number'
-              min='1'
-              max='200'
-              value={this.state.combat.numAttacks || ''}
-              onChange={this.handleChange}
-            />
+            <div className='statInputContent'>
+              {/* number of attacks */}
+              <label>Attacks</label>
+              <input
+                placeholder="numAttacks"
+                name="numAttacks"
+                type='number'
+                min='1'
+                max='200'
+                value={this.state.combat.numAttacks || ''}
+                onChange={this.handleChange}
+              />
+            </div>
           </div>
           <div className='statInput'>
-            {/* hit characteristic */}
-            <label>Hit</label>
-            <br></br>
-            <input
-              placeholder="hit"
-              name="hit"
-              type='number'
-              min='2'
-              max='6'
-              value={this.state.combat.hit || ''}
-              onChange={this.handleChange}
-            />
-            <label>
+            <div className='statInputContent'>
+              {/* hit characteristic */}
+              <label>Hit</label>
+              <input
+                placeholder="hit"
+                name="hit"
+                type='number'
+                min='2'
+                max='6'
+                value={this.state.combat.hit || ''}
+                onChange={this.handleChange}
+              />
               <select name='hitReroll' onChange={this.updateReroll}>
                 <option value='0'>No rerolls</option>
                 <option value='1'>Roll 1s</option>
                 <option value='2'>Roll Failed Hits</option>
               </select>
-            </label>
+            </div>
           </div>
           <div className='statInput'>
-            {/* wound characteristic */}
-            <label>Wound</label>
-            <br></br>
-            <input
-              placeholder="wound"
-              name="wound"
-              type='number'
-              min='2'
-              max='6'
-              value={this.state.combat.wound || ''}
-              onChange={this.handleChange}
-            />
-            <label>
+            <div className='statInputContent'>
+              {/* wound characteristic */}
+              <label>Wound</label>
+              <input
+                placeholder="wound"
+                name="wound"
+                type='number'
+                min='2'
+                max='6'
+                value={this.state.combat.wound || ''}
+                onChange={this.handleChange}
+              />
               <select name='woundReroll' onChange={this.updateReroll}>
                 <option value='0'>No rerolls</option>
                 <option value='1'>Roll 1s</option>
                 <option value='2'>Roll Failed Wounds</option>
               </select>
-            </label>
+            </div>
           </div>
           <div className='statInput'>
-            {/* rend characteristic */}
-            <label>Rend</label>
-            <br></br>
-            <input
-              placeholder="n/a"
-              name="rend"
-              type='number'
-              min='0'
-              max='6'
-              value={this.state.combat.rend || ''}
-              onChange={this.handleChange}
-            />
+            <div className='statInputContent'>
+              {/* rend characteristic */}
+              <label>Rend</label>
+              <input
+                placeholder="n/a"
+                name="rend"
+                type='number'
+                min='0'
+                max='6'
+                value={this.state.combat.rend || ''}
+                onChange={this.handleChange}
+              />
+            </div>
           </div>
           <div className='statInput'>
-            {/* damage characteristic */}
-            <label>Damage</label>
-            <br></br>
-            <input
-              placeholder="damage"
-              name="damage"
-              type='number'
-              min='1'
-              max='6'
-              value={this.state.combat.damage || ''}
-              onChange={this.handleChange}
-            />
+            <div className='statInputContent'>
+              {/* damage characteristic */}
+              <label>Damage</label>
+              <input
+                placeholder="damage"
+                name="damage"
+                type='number'
+                min='1'
+                max='6'
+                value={this.state.combat.damage || ''}
+                onChange={this.handleChange}
+              />
+            </div>
           </div>
           <div className='statInput'>
-            {/* armor characteristic */}
-            <label>Armor</label>
-            <br></br>
-            <input
-              placeholder="armorSave"
-              name="armorSave"
-              type='number'
-              min='2'
-              max='7'
-              value={this.state.combat.armorSave || ''}
-              onChange={this.handleChange}
-            />
-            <label>
+            <div className='statInputContent'>
+              {/* armor characteristic */}
+              <label>Armor</label>
+              <input
+                placeholder="armorSave"
+                name="armorSave"
+                type='number'
+                min='2'
+                max='7'
+                value={this.state.combat.armorSave || ''}
+                onChange={this.handleChange}
+              />
               <select name='armorSaveReroll' onChange={this.updateReroll}>
                 <option value='0'>No rerolls</option>
                 <option value='1'>Roll 1s</option>
                 <option value='2'>Roll Failed Armor Saves</option>
               </select>
-            </label>
+            </div>
           </div>
           <div title='Set to 7 to disables FNP rolls' className='statInput'>
-            {/* FNP characteristic */}
-            <label>FNP</label>
-            <br></br>
-            <input
-              placeholder="fnp"
-              name="fnp"
-              type='number'
-              min='2'
-              max='7'
-              value={this.state.combat.fnp || ''}
-              onChange={this.handleChange}
-            />
-            <label>
+            <div className='statInputContent'>
+              {/* FNP characteristic */}
+              <label>FNP</label>
+              <input
+                placeholder="fnp"
+                name="fnp"
+                type='number'
+                min='2'
+                max='7'
+                value={this.state.combat.fnp || ''}
+                onChange={this.handleChange}
+              />
               <select name='fnpReroll' onChange={this.updateReroll}>
                 <option value='0'>No rerolls</option>
                 <option value='1'>Roll 1s</option>
                 <option value='2'>Roll Failed FNP Rolls</option>
               </select>
-            </label>
+            </div>
           </div>
         </form>
         <Button id='rollButton' onClick={this.roll}>Roll</Button>
