@@ -37,15 +37,15 @@ class Combats extends Component {
         _id: undefined,
         numAttacks: undefined,
         hit: undefined,
-        hitReroll: undefined,
+        hitReroll: 0,
         wound: undefined,
-        woundReroll: undefined,
+        woundReroll: 0,
         rend: undefined,
         damage: undefined,
         armorSave: undefined,
-        armorSaveReroll: undefined,
+        armorSaveReroll: 0,
         fnp: undefined,
-        fnpReroll: undefined
+        fnpReroll: 0
       },
       // used to refresh the page (mostly the dropdown) after changes
       updated: false,
