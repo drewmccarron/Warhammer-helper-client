@@ -85,6 +85,7 @@ class Combats extends Component {
         this.setState({ combat: res.data.combat })
       })
       .catch(console.error)
+    console.log(this.state)
   }
   // deletes a combat profile
   delete = id => {
@@ -288,7 +289,7 @@ class Combats extends Component {
                 value={this.state.combat.hit || ''}
                 onChange={this.handleChange}
               />
-              <select name='hitReroll' onChange={this.updateReroll}>
+              <select name='hitReroll' onChange={this.updateReroll} value={this.state.combat.hitReroll}>
                 <option value='0'>No rerolls</option>
                 <option value='1'>Roll 1s</option>
                 <option value='2'>Roll Failed Hits</option>
@@ -308,7 +309,7 @@ class Combats extends Component {
                 value={this.state.combat.wound || ''}
                 onChange={this.handleChange}
               />
-              <select name='woundReroll' onChange={this.updateReroll}>
+              <select name='woundReroll' onChange={this.updateReroll} value={this.state.combat.woundReroll}>
                 <option value='0'>No rerolls</option>
                 <option value='1'>Roll 1s</option>
                 <option value='2'>Roll Failed Wounds</option>
@@ -358,7 +359,7 @@ class Combats extends Component {
                 value={this.state.combat.armorSave || ''}
                 onChange={this.handleChange}
               />
-              <select name='armorSaveReroll' onChange={this.updateReroll}>
+              <select name='armorSaveReroll' onChange={this.updateReroll} value={this.state.combat.armorSaveReroll}>
                 <option value='0'>No rerolls</option>
                 <option value='1'>Roll 1s</option>
                 <option value='2'>Roll Failed Armor Saves</option>
@@ -378,7 +379,7 @@ class Combats extends Component {
                 value={this.state.combat.fnp || ''}
                 onChange={this.handleChange}
               />
-              <select name='fnpReroll' onChange={this.updateReroll}>
+              <select name='fnpReroll' onChange={this.updateReroll} value={this.state.combat.fnpReroll}>
                 <option value='0'>No rerolls</option>
                 <option value='1'>Roll 1s</option>
                 <option value='2'>Roll Failed FNP Rolls</option>
