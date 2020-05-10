@@ -61,6 +61,10 @@ label select {
   margin-left: -13px;
 }
 
+#firstStatInput input {
+  width: 40%;
+}
+
 .crudButtons {
   margin: 0px 2px;
 }
