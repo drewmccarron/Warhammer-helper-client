@@ -85,7 +85,6 @@ class Combats extends Component {
         this.setState({ combat: res.data.combat })
       })
       .catch(console.error)
-    console.log(this.state)
   }
   // deletes a combat profile
   delete = id => {
