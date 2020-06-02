@@ -83,6 +83,8 @@ class Combats extends Component {
     showCombat(event.target.value)
       .then(res => {
         this.setState({ combat: res.data.combat })
+        this.setState({ data: createDataPoint(this.state.combat) })
+        this.setState({ roll: true })
       })
       .catch(console.error)
   }
@@ -160,6 +162,8 @@ class Combats extends Component {
       .then(res => {
         this.setState({ combats: res.data.combats })
         this.setState({ combat: this.state.combats[0] })
+        this.setState({ roll: true })
+        this.setState({ data: createDataPoint(this.state.combat) })
       })
       .catch(console.error)
   }
