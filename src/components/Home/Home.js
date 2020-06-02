@@ -250,7 +250,7 @@ class Combats extends Component {
     }
     return (
       <div>
-        <h2>Combat Simulator</h2>
+        <h2>Age of Sigmar</h2>
         {combatJSX}
         <form onSubmit={this.create}>
           {/* title */}
