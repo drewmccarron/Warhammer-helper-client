@@ -390,7 +390,7 @@ class Combats extends Component {
             </div>
           </div>
         </form>
-        <Button id='rollButton' onClick={this.roll}>Roll</Button>
+        <Button id='rollButton' onClick={this.roll}>Reroll</Button>
         {/* displayed after clicking the roll button */}
         {rollJSX}
       </div>
