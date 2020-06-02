@@ -295,7 +295,7 @@ class Combats extends Component {
               <select name='hitReroll' onChange={this.updateReroll} value={this.state.combat.hitReroll ? this.state.combat.hitReroll : 0}>
                 <option value='0'>No rerolls</option>
                 <option value='1'>Roll 1s</option>
-                <option value='2'>Roll Failed Hits</option>
+                <option value='2'>Roll Fails</option>
               </select>
             </div>
           </div>
@@ -315,7 +315,7 @@ class Combats extends Component {
               <select name='woundReroll' onChange={this.updateReroll} value={this.state.combat.woundReroll ? this.state.combat.woundReroll : 0}>
                 <option value='0'>No rerolls</option>
                 <option value='1'>Roll 1s</option>
-                <option value='2'>Roll Failed Wounds</option>
+                <option value='2'>Roll Fails</option>
               </select>
             </div>
           </div>
@@ -365,7 +365,7 @@ class Combats extends Component {
               <select name='armorSaveReroll' onChange={this.updateReroll} value={this.state.combat.armorSaveReroll ? this.state.combat.armorSaveReroll : 0}>
                 <option value='0'>No rerolls</option>
                 <option value='1'>Roll 1s</option>
-                <option value='2'>Roll Failed Armor Saves</option>
+                <option value='2'>Roll Fails</option>
               </select>
             </div>
           </div>
@@ -385,7 +385,7 @@ class Combats extends Component {
               <select name='fnpReroll' onChange={this.updateReroll} value={this.state.combat.fnpReroll ? this.state.combat.fnpReroll : 0}>
                 <option value='0'>No rerolls</option>
                 <option value='1'>Roll 1s</option>
-                <option value='2'>Roll Failed FNP Rolls</option>
+                <option value='2'>Roll Fails</option>
               </select>
             </div>
           </div>
