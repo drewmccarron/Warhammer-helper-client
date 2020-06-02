@@ -43,8 +43,9 @@ label select {
 }
 
 .statInput input {
-  width: 20%;
+  width: 35%;
   text-align: center;
+  margin-bottom: 5px;
 }
 
 .statInput select {
