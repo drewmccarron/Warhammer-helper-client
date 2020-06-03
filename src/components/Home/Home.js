@@ -78,6 +78,8 @@ class Combats extends Component {
     }
     const editedCombat = Object.assign(this.state.combat, createdField)
     this.setState({ combat: editedCombat })
+    this.setState({ roll: true })
+    this.setState({ data: createDataPoint(this.state.combat) })
   }
   // called by selecting a combat profile from the dropdown menu
   // replaces the previous state values with those of the selected profile
